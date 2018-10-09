@@ -6,7 +6,7 @@ A credit card hub "wallet" service, designed to improve the customer payment exp
 - [Technology](#technology)
 - [Developing](#developing)
 	- [First Install](#first-install)
-	- [Running tests](#running-the-tests)
+	- [Running the tests](#running-the-tests)
 - [API Documentation](#testing)
 - [Acknowledgement](#acknowledgement)       
 
