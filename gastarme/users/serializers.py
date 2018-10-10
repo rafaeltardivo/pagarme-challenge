@@ -44,7 +44,7 @@ class UserSerializer(BaseUserSerializer):
     """Serializer for the regular user."""
 
     def create(self, validated_data, **kwargs):
-        user = super().create(self, validated_data)
+        user = super().create(validated_data)
         return user
 
 
