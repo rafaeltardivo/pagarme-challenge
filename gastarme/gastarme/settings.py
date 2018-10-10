@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import datetime
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -126,3 +127,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    )
+}
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+        'authentications.handlers.jwt_response_payload_handler',
+    'JWT_EXPIRATION_DELTA':
+        config('JWT_TIMEDELTA', default=datetime.timedelta(seconds=3600)),
+    'JWT_SECRET_KEY': config('JWT_SECRET_KEY', default='cerberus'),
+    'JWT_ALLOW_REFRESH': True,
+}
