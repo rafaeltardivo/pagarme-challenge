@@ -6,20 +6,31 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
 from .models import User
+from .utils import is_alpha_or_space
+from .import logger
 
 
 class BaseUserSerializer(serializers.ModelSerializer):
     """Base serializer for the user model."""
     password = serializers.CharField(write_only=True)
 
-    def validate_password(self, data):
+    def validate_name(self, value):
+        """Validates name as alpha only."""
+
+        if not is_alpha_or_space(value):
+            raise ValidationError(
+                "Must contain only alphanumeric characters"
+            )
+        return value
+
+    def validate_password(self, value):
         """Validates the password according to configured validators."""
 
         try:
-            validate_password(data, User)
+            validate_password(value, User)
         except ValidationError as error:
             raise serializers.ValidationError(error.messages)
-        return data
+        return value
 
     def create(self, validated_data, **kwargs):
         """Creates the user with the given validated data."""
@@ -33,6 +44,11 @@ class BaseUserSerializer(serializers.ModelSerializer):
             )
             user.set_password(validated_data['password'])
             user.save()
+
+        logger.info(
+            'Created user {}'.format(user.email),
+            extra={"user": self.context['request'].user}
+        )
         return user
 
     class Meta:
