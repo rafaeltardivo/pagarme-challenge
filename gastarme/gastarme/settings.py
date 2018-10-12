@@ -142,3 +142,5 @@ JWT_AUTH = {
     'JWT_SECRET_KEY': config('JWT_SECRET_KEY', default='cerberus'),
     'JWT_ALLOW_REFRESH': True,
 }
+
+TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
