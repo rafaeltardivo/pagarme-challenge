@@ -4,5 +4,5 @@ from .views import UserCreateView, SuperuserCreateView
 
 urlpatterns = [
     path('', UserCreateView.as_view(), name='user_create'),
-    path('superuser/', SuperuserCreateView.as_view(), name='staff_create'),
+    path('superuser/', SuperuserCreateView.as_view(), name='superuser_create'),
 ]
