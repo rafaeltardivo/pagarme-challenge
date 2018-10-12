@@ -13,6 +13,11 @@ class Wallet(models.Model):
     credit_limit = models.DecimalField(max_digits=8, decimal_places=2)
     credit_available = models.DecimalField(max_digits=8, decimal_places=2)
 
+    def __str__(self):
+        return 'User: {} limit: {} available: {}'.format(
+            self.user, self.credit_limit, self.credit_available
+        )
+
 
 class CreditCard(models.Model):
     """Model for credit cards."""
@@ -27,3 +32,8 @@ class CreditCard(models.Model):
     expires_at = models.DateField()
     billing_date = models.DateField()
     limit = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self):
+        return 'Wallet: {} number: {} limit: {} billing_date: {}'.format(
+            self.wallet, self.number, self.limit, self.billing_date
+        )
