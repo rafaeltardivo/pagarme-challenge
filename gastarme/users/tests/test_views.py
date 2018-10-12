@@ -42,7 +42,7 @@ class TestUserView(test.APITransactionTestCase):
             format='json'
         )
 
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(User.objects.count(), 0)
 
     def test_forbidden_superuser_creation(self):
@@ -62,8 +62,8 @@ class TestUserView(test.APITransactionTestCase):
             format='json'
         )
 
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(User.objects.count(), 0)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(User.objects.count(), 1)
 
     @patch('users.logger.info')
     def test_superuser_creation(self, logger_mock):
