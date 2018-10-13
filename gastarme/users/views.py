@@ -15,7 +15,7 @@ class UserCreateView(CreateAPIView):
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
-        logger.info("User creation request", extra={'user': request.user})
+        logger.info("User create request", extra={'user': request.user})
         return super().post(request, *args, **kwargs)
 
 
@@ -26,5 +26,5 @@ class SuperuserCreateView(CreateAPIView):
     serializer_class = SuperuserSerializer
 
     def post(self, request, *args, **kwargs):
-        logger.info("Superuser creation request", extra={'user': request.user})
+        logger.info("Superuser create request", extra={'user': request.user})
         return super().post(request, *args, **kwargs)
