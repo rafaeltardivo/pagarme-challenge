@@ -34,6 +34,6 @@ class CreditCard(models.Model):
     limit = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
-        return 'Wallet: {} number: {} limit: {} billing_date: {}'.format(
-            self.wallet, self.number, self.limit, self.billing_date
+        return 'Wallet: {} number: {} limit: {} monthly_billing_day: {}'.format(
+            self.wallet, self.number, self.limit, self.monthly_billing_day
         )
