@@ -24,7 +24,7 @@ class CreditCardFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = CreditCard
 
-    wallet = factory.SubFactory()
+    wallet = factory.SubFactory(WalletFactory)
     number = '4729333912967715'
     cardholder_name = "TEST USER CARD"
     cvv = '333'
