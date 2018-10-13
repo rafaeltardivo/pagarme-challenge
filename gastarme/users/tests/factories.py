@@ -4,7 +4,7 @@ from users.models import User
 
 
 class UserFactory(factory.django.DjangoModelFactory):
-    """ Factory for the model CallRecord """
+    """ Factory for the model User """
 
     class Meta:
         model = User
