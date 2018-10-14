@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
 from .models import User
-from .utils import is_alpha_or_space
+from commons.utils import is_alpha_or_space
 from .import logger
 
 
