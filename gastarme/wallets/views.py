@@ -35,7 +35,7 @@ class WalletViewSet(ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         logger.info("Wallet list request", extra={'user': request.user})
 
-        return super().list(request, *args, **kwargs)
+        return super().retrieve(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
         logger.info("Wallet update request", extra={'user': request.user})
@@ -51,21 +51,38 @@ class WalletViewSet(ModelViewSet):
 class CreditCardViewSet(ModelViewSet):
     """"CRUD view for creditcards."""
     permission_classes = (IsAuthenticated, )
-    queryset = CreditCard.objects.all()
     serializer_class = CreditCardSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user and hasattr(user, 'wallet'):
+            queryset = user.wallet.credit_cards.all()
+        else:
+            queryset = CreditCard.objects.none()
+        return queryset
 
     def create(self, request, *args, **kwargs):
         logger.info("CreditCard create request", extra={'user': request.user})
+
         return super().create(request, *args, **kwargs)
 
     def list(self, request, *args, **kwargs):
         logger.info("CreditCard list request", extra={'user': request.user})
+
         return super().list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        logger.info("CreditCard detail request", extra={'user': request.user})
+
+        return super().retrieve(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
         logger.info("CreditCard update request", extra={'user': request.user})
+
         return super().update(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         logger.info("CreditCard delete request", extra={'user': request.user})
+
         return super().destroy(request, *args, **kwargs)
