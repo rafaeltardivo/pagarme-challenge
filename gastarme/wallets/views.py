@@ -1,6 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
+from commons.permissions import IsUserCresteListOrSuperuserListDelete
 from .models import Wallet, CreditCard
 from .serializers import WalletSerializer, CreditCardSerializer
 
@@ -9,24 +10,41 @@ from . import logger
 
 class WalletViewSet(ModelViewSet):
     """CRUD view for wallets."""
-    permission_classes = (IsAuthenticated, )
-    queryset = Wallet.objects.all()
+    permission_classes = (IsUserCresteListOrSuperuserListDelete, )
     serializer_class = WalletSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user and user.is_superuser:
+            queryset = Wallet.objects.all()
+        else:
+            queryset = Wallet.objects.filter(user=user)
+        return queryset
 
     def create(self, request, *args, **kwargs):
         logger.info("Wallet create request", extra={'user': request.user})
+
         return super().create(request, *args, **kwargs)
 
     def list(self, request, *args, **kwargs):
         logger.info("Wallet list request", extra={'user': request.user})
+
+        return super().list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        logger.info("Wallet list request", extra={'user': request.user})
+
         return super().list(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
         logger.info("Wallet update request", extra={'user': request.user})
+
         return super().update(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         logger.info("Wallet delete request", extra={'user': request.user})
+
         return super().destroy(request, *args, **kwargs)
 
 

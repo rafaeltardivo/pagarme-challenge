@@ -14,11 +14,6 @@ class TestWalletSerializer(TestCase):
         self.wallet = WalletFactory()
         self.wallet_serializer = WalletSerializer(instance=self.wallet)
 
-    def test_name_content(self):
-        self.assertEqual(
-            self.wallet.user.id,
-            self.wallet_serializer.data['user'])
-
     def test_credit_limit_content(self):
         self.assertEqual(
             str(self.wallet.credit_limit),

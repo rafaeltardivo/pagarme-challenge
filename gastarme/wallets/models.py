@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 
 from users.models import User
@@ -10,8 +12,17 @@ class Wallet(models.Model):
         on_delete=models.PROTECT,
         related_name='wallet'
     )
-    credit_limit = models.DecimalField(max_digits=8, decimal_places=2)
-    credit_available = models.DecimalField(max_digits=8, decimal_places=2)
+    credit_limit = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=Decimal('0.00')
+    )
+    credit_available = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=Decimal('0.00')
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return 'User: {} limit: {} available: {}'.format(

@@ -1,8 +1,8 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 from .views import WalletViewSet, CreditCardViewSet
 
-urlpatterns = [
-    path('', WalletViewSet, name='wallets'),
-    path('cards/', CreditCardViewSet, name='creditcards'),
-]
+router = DefaultRouter()
+router.register('', WalletViewSet, 'wallets')
+router.register('creditcards', CreditCardViewSet, 'creditcards')
+urlpatterns = router.urls
