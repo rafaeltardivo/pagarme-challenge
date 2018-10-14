@@ -37,7 +37,7 @@ class CreditCard(models.Model):
         on_delete=models.PROTECT,
         related_name='credit_cards'
     )
-    number = models.CharField(max_length=16)
+    number = models.CharField(max_length=16, unique=True)
     cardholder_name = models.CharField(max_length=26)
     cvv = models.CharField(max_length=3)
     expires_at = models.DateField()
