@@ -1,10 +1,12 @@
+from decimal import Decimal
+from datetime import date
 from unittest.mock import patch
 
 from django.urls import reverse
 from rest_framework import test, status
 
 from users.models import User
-from wallets.models import Wallet
+from wallets.models import Wallet, CreditCard
 
 
 class TestUserView(test.APITransactionTestCase):
@@ -83,3 +85,77 @@ class TestUserView(test.APITransactionTestCase):
         logger_mock.assert_called()
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    @patch('wallets.logger.info')
+    def test_user_creditcard_create(self, logger_mock):
+        wallet = Wallet.objects.create(user=self.user)
+        self.client.force_authenticate(self.user)
+
+        response = self.client.post(
+            reverse('creditcards-list'),
+            {
+                'wallet': wallet.id,
+                'cardholder_name': 'TEST USER ONE',
+                'number': '4729333912967715',
+                'cvv': '999',
+                'expires_at': '2022-10-30',
+                'monthly_billing_day': 9,
+                'limit': '900.00'
+            },
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(CreditCard.objects.count(), 1)
+        logger_mock.assert_called()
+
+    @patch('wallets.logger.info')
+    def test_user_creditcard_detail(self, logger_mock):
+        wallet = Wallet.objects.create(user=self.user)
+        credit_card = CreditCard.objects.create(
+            wallet=wallet,
+            cardholder_name='TEST USER ONE',
+            number='4729333912967715',
+            cvv='999',
+            expires_at=date(2022, 10, 30),
+            monthly_billing_day=9,
+            limit=900.00
+        )
+        self.client.force_authenticate(self.user)
+
+        response = self.client.get(
+            reverse('creditcards-detail', args=[credit_card.id])
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        logger_mock.assert_called()
+
+    @patch('wallets.logger.info')
+    def test_user_creditcard_list(self, logger_mock):
+        wallet = Wallet.objects.create(user=self.user)
+        CreditCard.objects.create(
+            wallet=wallet,
+            cardholder_name='TEST USER ONE',
+            number='4729333912967715',
+            cvv='999',
+            expires_at=date(2022, 10, 30),
+            monthly_billing_day=9,
+            limit=900.00
+        )
+        CreditCard.objects.create(
+            wallet=wallet,
+            cardholder_name='TEST USER ONE',
+            number='4729333912967716',
+            cvv='999',
+            expires_at=date(2022, 10, 30),
+            monthly_billing_day=9,
+            limit=900.00
+        )
+        self.client.force_authenticate(self.user)
+
+        response = self.client.get(
+            reverse('creditcards-list')
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        logger_mock.assert_called()
