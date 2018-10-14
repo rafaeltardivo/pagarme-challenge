@@ -32,6 +32,7 @@ class CreditCard(models.Model):
     expires_at = models.DateField()
     monthly_billing_day = models.PositiveIntegerField()
     limit = models.DecimalField(max_digits=8, decimal_places=2)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return 'Wallet: {} number: {} limit: {} monthly_billing_day: {}'.format(
