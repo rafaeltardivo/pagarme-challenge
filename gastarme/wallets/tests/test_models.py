@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.db import IntegrityError
 
 from wallets.models import Wallet, CreditCard
 from .factories import WalletFactory, CreditCardFactory
@@ -34,3 +35,9 @@ class CreditCardModelTestCase(TestCase):
         credit_card = CreditCardFactory(number='4729333912967716')
 
         self.assertEqual(str(credit_card), expected_result)
+
+    def test_unique_card_number(self):
+        CreditCardFactory(number='4729333912967716')
+
+        with self.assertRaises(IntegrityError):
+            CreditCardFactory(number='4729333912967716')
