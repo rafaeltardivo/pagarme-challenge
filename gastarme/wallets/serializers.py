@@ -7,11 +7,30 @@ from commons.utils import is_alpha_or_space
 
 class WalletSerializer(serializers.ModelSerializer):
     """Serializer for the model Wallet."""
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault(),
+    )
+
+    def validate_user(self, value):
+        if hasattr(value, 'wallet'):
+            raise serializers.ValidationError('Already has a wallet.')
+        return value
 
     class Meta:
         model = Wallet
-        fields = ('__all__')
-        read_only_fields = ('credit_limit', 'credit_available')
+        fields = (
+            'id',
+            'credit_limit',
+            'credit_available',
+            'created_at',
+            'user'
+        )
+        read_only_fields = (
+            'id'
+            'credit_limit',
+            'credit_available',
+            'created_at',
+        )
 
 
 class CreditCardSerializer(serializers.ModelSerializer):
