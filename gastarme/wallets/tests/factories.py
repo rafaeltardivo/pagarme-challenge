@@ -31,3 +31,4 @@ class CreditCardFactory(factory.django.DjangoModelFactory):
     expires_at = date(2022, 10, 30)
     monthly_billing_day = 10
     limit = Decimal('500.00')
+    is_active = True

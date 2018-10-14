@@ -6,7 +6,7 @@ from .factories import UserFactory
 
 
 class TestUserSerializer(TestCase):
-    """Test cases for the user serializer."""
+    """Test cases for the User serializer."""
 
     def setUp(self):
         self.user = UserFactory()
