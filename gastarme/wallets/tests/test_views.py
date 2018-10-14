@@ -159,3 +159,47 @@ class TestUserView(test.APITransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         logger_mock.assert_called()
+
+    @patch('wallets.logger.info')
+    def test_user_creditcard_update(self, logger_mock):
+        wallet = Wallet.objects.create(user=self.user)
+        credit_card = CreditCard.objects.create(
+            wallet=wallet,
+            cardholder_name='TEST USER ONE',
+            number='4729333912967715',
+            cvv='999',
+            expires_at=date(2022, 10, 30),
+            monthly_billing_day=9,
+            limit=900.00
+        )
+        self.client.force_authenticate(self.user)
+
+        response = self.client.patch(
+            reverse('creditcards-detail', args=[credit_card.id]),
+            {
+                'limit': '1000.00'
+            },
+            format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        logger_mock.assert_called()
+
+    @patch('wallets.logger.info')
+    def test_user_creditcard_delete(self, logger_mock):
+        wallet = Wallet.objects.create(user=self.user)
+        credit_card = CreditCard.objects.create(
+            wallet=wallet,
+            cardholder_name='TEST USER ONE',
+            number='4729333912967715',
+            cvv='999',
+            expires_at=date(2022, 10, 30),
+            monthly_billing_day=9,
+            limit=900.00
+        )
+        self.client.force_authenticate(self.user)
+
+        response = self.client.delete(
+            reverse('creditcards-detail', args=[credit_card.id])
+        )
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        logger_mock.assert_called()
