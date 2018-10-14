@@ -36,6 +36,20 @@ class WalletSerializer(serializers.ModelSerializer):
 class CreditCardSerializer(serializers.ModelSerializer):
     """Serializer for the model CreditCard."""
 
+    def validate_wallet(self, value):
+        request = self.context.get('request')
+
+        if request and request.user:
+            try:
+                if not request.user.wallet.id == value.id:
+                    raise serializers.ValidationError(
+                        'Wallet does not belong to current user.'
+                    )
+            except (AttributeError, ValueError):
+                raise serializers.ValidationError('Invalid wallet.')
+
+        return value
+
     def validate_number(self, value):
         if not value.isdigit():
             raise serializers.ValidationError('Must be only numbers.')
