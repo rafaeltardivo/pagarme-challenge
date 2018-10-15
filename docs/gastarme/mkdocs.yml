@@ -1,0 +1,6 @@
+site_name: Gastar.me
+nav:
+    - Home: index.md
+    - API Documentation: api.md
+theme: readthedocs
+
