@@ -11,3 +11,4 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     name = 'Test Name'
     email = 'name@test.com'
+    is_superuser = False
