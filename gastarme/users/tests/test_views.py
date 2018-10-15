@@ -13,14 +13,14 @@ class TestUserView(test.APITransactionTestCase):
         self.assertEqual(reverse('user_create'), '/v1/users/')
 
     def test_superuser_resource_url(self):
-        self.assertEqual(reverse('superuser_create'), '/v1/users/superuser/')
+        self.assertEqual(reverse('superuser_create'), '/v1/users/superusers/')
 
     @patch('users.logger.info')
     def test_user_creation(self, logger_mock):
         response = self.client.post(
             reverse('user_create'),
             {
-                'name': 'test',
+                'name': 'Test user',
                 'email': 'test@email.com',
                 'password': 'pass1234'
             },
@@ -77,7 +77,7 @@ class TestUserView(test.APITransactionTestCase):
         response = self.client.post(
             reverse('superuser_create'),
             {
-                'name': 'test',
+                'name': 'Test super',
                 'email': 'test@email.com',
                 'password': 'pass1234'
             },

@@ -19,7 +19,12 @@ class BaseUserSerializer(serializers.ModelSerializer):
 
         if not is_alpha_or_space(value):
             raise ValidationError(
-                "Must contain only alphanumeric characters"
+                "Must contain only alphanumeric characters."
+            )
+
+        if len(value) < 8:
+            raise ValidationError(
+                "Must contain at least 8 characters."
             )
         return value
 
