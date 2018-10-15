@@ -12,6 +12,13 @@ A credit card hub "wallet" service, designed to improve the customer payment exp
 
 
 ## Technology
+- [Python](https://www.python.org/) 3.6.5
+- [Django](https://www.djangoproject.com/) 2.0
+- [Django REST Framework](https://www.django-rest-framework.org/) 3.8.2
+- [Django Filter](https://django-filter.readthedocs.io/en/master/)2.0.0
+- [Python Decouple] (https://github.com/henriquebastos/python-decouple) 3.1
+- [Factory Boy](https://factoryboy.readthedocs.io/en/latest/) 2.11.1  
+- [FreezeGun](https://github.com/spulec/freezegun) 0.3.10
 
 ## Developing
 ### First Install
