@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'wallets.apps.WalletsConfig',
 
     'rest_framework',
+    'django_filters',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -131,6 +132,9 @@ AUTH_USER_MODEL = 'users.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
     )
 }
 

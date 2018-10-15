@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from commons.permissions import IsUserCresteListOrSuperuserListDelete
 from .models import Wallet, CreditCard
 from .serializers import WalletSerializer, CreditCardSerializer
+from .filters import WalletFilter
 
 from . import logger
 
@@ -12,6 +13,7 @@ class WalletViewSet(ModelViewSet):
     """CRUD view for wallets."""
     permission_classes = (IsUserCresteListOrSuperuserListDelete, )
     serializer_class = WalletSerializer
+    filter_class = WalletFilter
 
     def get_queryset(self):
         user = self.request.user
