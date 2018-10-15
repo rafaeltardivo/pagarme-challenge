@@ -33,6 +33,14 @@ class WalletSerializer(serializers.ModelSerializer):
         )
 
 
+class SuperuserWalletSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Wallet
+        fields = ('__all__')
+        read_only_fields = ('__all__', )
+
+
 class CreditCardSerializer(serializers.ModelSerializer):
     """Serializer for the model CreditCard."""
 
