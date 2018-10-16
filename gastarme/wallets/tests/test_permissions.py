@@ -56,7 +56,7 @@ class TestWalletPermissions(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
-            reverse('creditcards-list'),
+            reverse('wallet-creditcards-list', args=[wallet.id]),
             {
                 'wallet': wallet.id + 1,
                 'cardholder_name': 'TEST USER ONE',

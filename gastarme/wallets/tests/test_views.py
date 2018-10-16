@@ -27,12 +27,12 @@ class TestUserView(test.APITransactionTestCase):
 
     def test_superuser_resource_url(self):
         self.assertEqual(
-            reverse('creditcards-list'),
-            '/v1/wallets/creditcards/'
+            reverse('wallet-creditcards-list', args=[1]),
+            '/v1/wallets/1/creditcards/'
         )
         self.assertEqual(
-            reverse('creditcards-detail', args=[1]),
-            '/v1/wallets/creditcards/1/'
+            reverse('wallet-creditcards-detail', args=[1, 1]),
+            '/v1/wallets/1/creditcards/1/'
         )
 
     @patch('wallets.logger.info')
@@ -89,7 +89,7 @@ class TestUserView(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
-            reverse('creditcards-list'),
+            reverse('wallet-creditcards-list', args=[wallet.id]),
             {
                 'wallet': wallet.id,
                 'cardholder_name': 'TEST USER ONE',
@@ -104,27 +104,6 @@ class TestUserView(test.APITransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(CreditCard.objects.count(), 1)
-        logger_mock.assert_called()
-
-    @patch('wallets.logger.info')
-    def test_user_creditcard_detail(self, logger_mock):
-        wallet = WalletFactory(user=self.user)
-        credit_card = CreditCardFactory(
-            wallet=wallet,
-            cardholder_name='TEST USER ONE',
-            number='4729333912967715',
-            cvv='999',
-            expires_at=date(2022, 10, 30),
-            monthly_billing_day=9,
-            limit=900.00
-        )
-        self.client.force_authenticate(self.user)
-
-        response = self.client.get(
-            reverse('creditcards-detail', args=[credit_card.id])
-        )
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
         logger_mock.assert_called()
 
     @patch('wallets.logger.info')
@@ -151,33 +130,9 @@ class TestUserView(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.get(
-            reverse('creditcards-list')
+            reverse('wallet-creditcards-list', args=[wallet.id])
         )
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        logger_mock.assert_called()
-
-    @patch('wallets.logger.info')
-    def test_user_creditcard_update(self, logger_mock):
-        wallet = WalletFactory(user=self.user)
-        credit_card = CreditCardFactory(
-            wallet=wallet,
-            cardholder_name='TEST USER ONE',
-            number='4729333912967715',
-            cvv='999',
-            expires_at=date(2022, 10, 30),
-            monthly_billing_day=9,
-            limit=900.00
-        )
-        self.client.force_authenticate(self.user)
-
-        response = self.client.patch(
-            reverse('creditcards-detail', args=[credit_card.id]),
-            {
-                'limit': '1000.00'
-            },
-            format='json'
-        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         logger_mock.assert_called()
 
@@ -196,7 +151,10 @@ class TestUserView(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.delete(
-            reverse('creditcards-detail', args=[credit_card.id])
+            reverse(
+                'wallet-creditcards-detail',
+                args=[wallet.id, credit_card.id]
+            )
         )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         logger_mock.assert_called()

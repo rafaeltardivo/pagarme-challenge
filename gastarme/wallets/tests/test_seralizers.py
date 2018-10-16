@@ -72,12 +72,6 @@ class TestCreditCardSerializer(TestCase):
             self.credit_card_serializer.data['limit']
         )
 
-    def test_is_active_content(self):
-        self.assertEqual(
-            self.credit_card.is_active,
-            self.credit_card_serializer.data['is_active']
-        )
-
     def test_validate_number_length(self):
         data = {
             'wallet': 1,
