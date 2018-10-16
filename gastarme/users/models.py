@@ -18,3 +18,6 @@ class User(AbstractBaseUser):
         return self.email
 
     objects = UserManager()
+
+    class Meta:
+        ordering = ['id', ]

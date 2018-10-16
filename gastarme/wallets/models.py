@@ -29,6 +29,9 @@ class Wallet(models.Model):
             self.user, self.credit_limit, self.credit_available
         )
 
+    class Meta:
+        ordering = ['id', ]
+
 
 class CreditCard(models.Model):
     """Model for credit cards."""
@@ -49,3 +52,6 @@ class CreditCard(models.Model):
         return 'Wallet: {} number: {} limit: {} monthly_billing_day: {}'.format(
             self.wallet, self.number, self.limit, self.monthly_billing_day
         )
+
+    class Meta:
+        ordering = ['id', ]
