@@ -8,6 +8,14 @@ class IsSuperUser(BasePermission):
         return request.user and request.user.is_superuser
 
 
+class IsRegularUser(BasePermission):
+    """Permission class for regular users only."""
+
+    def has_permission(self, request, view):
+        return request.user and IsAuthenticated and not \
+            request.user.is_superuser
+
+
 class IsUserCresteListOrSuperuserListDelete(BasePermission):
     """Permission class for superusers (list, delete) or users(create, list)."""
     SUPERUSER_ACTIONS = ['GET', 'DELETE']
