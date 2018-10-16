@@ -1,7 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import MethodNotAllowed, PermissionDenied
 
-from commons.permissions import IsUserCresteListOrSuperuserListDelete
+from commons.permissions import (
+    IsUserCresteListOrSuperuserListDelete,
+    IsRegularUser
+)
+
 from .models import Wallet, CreditCard
 from .serializers import (
     WalletSerializer,
@@ -24,7 +28,18 @@ class WalletViewSet(ModelViewSet):
         if user and user.is_superuser:
             queryset = Wallet.objects.all()
         else:
-            queryset = Wallet.objects.filter(user=user)
+            queryset = Wallet.objects.none()
+
+            if user and hasattr(user, 'wallet'):
+                pk = self.kwargs.get('pk')
+
+                if pk:
+                    if user.wallet.id == int(pk):
+                        queryset = Wallet.objects.filter(pk=pk)
+                    else:
+                        raise PermissionDenied
+                else:
+                    queryset = Wallet.objects.filter(user=user)
         return queryset
 
     def get_serializer_class(self):
@@ -52,9 +67,7 @@ class WalletViewSet(ModelViewSet):
         return super().retrieve(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
-        logger.info("Wallet update request", extra={'user': request.user})
-
-        return super().update(request, *args, **kwargs)
+        raise MethodNotAllowed(request.method)
 
     def destroy(self, request, *args, **kwargs):
         logger.info("Wallet delete request", extra={'user': request.user})
@@ -64,16 +77,24 @@ class WalletViewSet(ModelViewSet):
 
 class CreditCardViewSet(ModelViewSet):
     """"CRUD view for creditcards."""
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsRegularUser, )
     serializer_class = CreditCardSerializer
 
     def get_queryset(self):
         user = self.request.user
+        queryset = CreditCard.objects.none()
 
         if user and hasattr(user, 'wallet'):
-            queryset = user.wallet.credit_cards.all()
-        else:
-            queryset = CreditCard.objects.none()
+            wallet_pk = self.kwargs.get('wallet_pk')
+
+            if wallet_pk:
+                if user.wallet.id == int(wallet_pk):
+                    queryset = CreditCard.objects.filter(wallet=wallet_pk)
+                else:
+                    raise PermissionDenied
+            else:
+                queryset = CreditCard.objects.filter(wallet__user=user)
+
         return queryset
 
     def create(self, request, *args, **kwargs):
@@ -92,9 +113,7 @@ class CreditCardViewSet(ModelViewSet):
         return super().retrieve(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
-        logger.info("CreditCard update request", extra={'user': request.user})
-
-        return super().update(request, *args, **kwargs)
+        raise MethodNotAllowed(request.method)
 
     def destroy(self, request, *args, **kwargs):
         logger.info("CreditCard delete request", extra={'user': request.user})
