@@ -84,6 +84,11 @@ class CreditCardSerializer(serializers.ModelSerializer):
         if not is_alpha_or_space(value):
             raise serializers.ValidationError('Must be letters and/or spaces.')
 
+        if not len(value) > 7:
+            raise serializers.ValidationError(
+                "Must contain at least 7 characters."
+            )
+
         return value.upper()
 
     def validate_monthly_billing_day(self, value):
@@ -100,4 +105,4 @@ class CreditCardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CreditCard
-        fields = ('__all__')
+        exclude = ('available',)
