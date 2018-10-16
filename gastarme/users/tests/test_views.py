@@ -4,6 +4,7 @@ from django.urls import reverse
 from rest_framework import test, status
 
 from users.models import User
+from users.tests.factories import UserFactory
 
 
 class TestUserView(test.APITransactionTestCase):
@@ -46,10 +47,7 @@ class TestUserView(test.APITransactionTestCase):
         self.assertEqual(User.objects.count(), 0)
 
     def test_forbidden_superuser_creation(self):
-        self.user = User.objects.create(
-            name='super',
-            email='super@email.com',
-        )
+        self.user = UserFactory(name='super', email='super@email.com')
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
@@ -67,7 +65,7 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('users.logger.info')
     def test_superuser_creation(self, logger_mock):
-        self.superuser = User.objects.create(
+        self.superuser = UserFactory(
             name='super',
             email='super@email.com',
             is_superuser=True

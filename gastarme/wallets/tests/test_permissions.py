@@ -1,10 +1,10 @@
-from datetime import date
 from unittest.mock import patch
 
 from django.urls import reverse
 from rest_framework import test, status
 
-from users.models import User
+from users.tests.factories import UserFactory
+from wallets.tests.factories import WalletFactory
 from wallets.models import Wallet, CreditCard
 
 
@@ -12,12 +12,9 @@ class TestWalletPermissions(test.APITransactionTestCase):
     """Test cases for the permissions of the wallets view."""
 
     def setUp(self):
-        self.user = User.objects.create(
-            name='user',
-            email='user@email.com',
-        )
+        self.user = UserFactory(name='user', email='user@email.com')
 
-        self.superuser = User.objects.create(
+        self.superuser = UserFactory(
             name='super',
             email='super@email.com',
             is_superuser=True
@@ -34,7 +31,7 @@ class TestWalletPermissions(test.APITransactionTestCase):
         self.assertEqual(Wallet.objects.count(), 0)
 
     def test_forbidden_superuser_wallet_update(self):
-        wallet = Wallet.objects.create(user=self.user)
+        wallet = WalletFactory(user=self.user)
         self.client.force_authenticate(self.superuser)
 
         response = self.client.put(
@@ -44,7 +41,7 @@ class TestWalletPermissions(test.APITransactionTestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_forbidden_user_wallet_delete(self):
-        wallet = Wallet.objects.create(user=self.user)
+        wallet = WalletFactory(user=self.user)
         self.client.force_authenticate(self.user)
 
         response = self.client.delete(
@@ -55,7 +52,7 @@ class TestWalletPermissions(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_user_unauthorized_wallet(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
+        wallet = WalletFactory(user=self.user)
         self.client.force_authenticate(self.user)
 
         response = self.client.post(

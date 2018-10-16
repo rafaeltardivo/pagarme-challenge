@@ -1,11 +1,11 @@
-from decimal import Decimal
 from datetime import date
 from unittest.mock import patch
 
 from django.urls import reverse
 from rest_framework import test, status
 
-from users.models import User
+from users.tests.factories import UserFactory
+from wallets.tests.factories import CreditCardFactory, WalletFactory
 from wallets.models import Wallet, CreditCard
 
 
@@ -13,12 +13,9 @@ class TestUserView(test.APITransactionTestCase):
     """Test cases for the wallet view."""
 
     def setUp(self):
-        self.user = User.objects.create(
-            name='user',
-            email='user@email.com',
-        )
+        self.user = UserFactory(name='user', email='user@email.com')
 
-        self.superuser = User.objects.create(
+        self.superuser = UserFactory(
             name='super',
             email='super@email.com',
             is_superuser=True
@@ -52,7 +49,7 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_user_wallet_detail(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
+        wallet = WalletFactory(user=self.user)
         self.client.force_authenticate(self.user)
 
         response = self.client.get(
@@ -64,7 +61,7 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_superuser_wallet_list(self, logger_mock):
-        Wallet.objects.create(user=self.user)
+        WalletFactory(user=self.user)
         self.client.force_authenticate(self.superuser)
 
         response = self.client.get(
@@ -76,7 +73,7 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_superuser_wallet_delete(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
+        wallet = WalletFactory(user=self.user)
         self.client.force_authenticate(self.superuser)
 
         response = self.client.delete(
@@ -88,7 +85,7 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_user_creditcard_create(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
+        wallet = WalletFactory(user=self.user)
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
@@ -111,8 +108,8 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_user_creditcard_detail(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
-        credit_card = CreditCard.objects.create(
+        wallet = WalletFactory(user=self.user)
+        credit_card = CreditCardFactory(
             wallet=wallet,
             cardholder_name='TEST USER ONE',
             number='4729333912967715',
@@ -132,8 +129,8 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_user_creditcard_list(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
-        CreditCard.objects.create(
+        wallet = WalletFactory(user=self.user)
+        CreditCardFactory(
             wallet=wallet,
             cardholder_name='TEST USER ONE',
             number='4729333912967715',
@@ -142,7 +139,7 @@ class TestUserView(test.APITransactionTestCase):
             monthly_billing_day=9,
             limit=900.00
         )
-        CreditCard.objects.create(
+        CreditCardFactory(
             wallet=wallet,
             cardholder_name='TEST USER ONE',
             number='4729333912967716',
@@ -162,8 +159,8 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_user_creditcard_update(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
-        credit_card = CreditCard.objects.create(
+        wallet = WalletFactory(user=self.user)
+        credit_card = CreditCardFactory(
             wallet=wallet,
             cardholder_name='TEST USER ONE',
             number='4729333912967715',
@@ -186,8 +183,8 @@ class TestUserView(test.APITransactionTestCase):
 
     @patch('wallets.logger.info')
     def test_user_creditcard_delete(self, logger_mock):
-        wallet = Wallet.objects.create(user=self.user)
-        credit_card = CreditCard.objects.create(
+        wallet = WalletFactory(user=self.user)
+        credit_card = CreditCardFactory(
             wallet=wallet,
             cardholder_name='TEST USER ONE',
             number='4729333912967715',

@@ -1,6 +1,7 @@
 from django.urls import reverse
 from rest_framework import test, status
 
+from users.tests.factories import UserFactory
 from users.models import User
 
 
@@ -22,10 +23,7 @@ class TestUserPermissions(test.APITransactionTestCase):
         self.assertEqual(User.objects.count(), 0)
 
     def test_forbidden_superuser_create(self):
-        self.user = User.objects.create(
-            name='super',
-            email='super@email.com',
-        )
+        self.user = UserFactory(name='super', email='super@email.com')
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
