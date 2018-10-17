@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('v1/auth/', include('authentications.urls')),
     path('v1/users/', include('users.urls')),
-    path('v1/wallets/', include('wallets.urls'))
+    path('v1/wallets/', include('wallets.urls')),
+    path('v1/purchases/', include('purchases.urls'))
 ]
