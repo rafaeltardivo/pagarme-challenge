@@ -58,4 +58,4 @@ class CreditCard(models.Model):
         )
 
     class Meta:
-        ordering = ['id', ]
+        ordering = ['-monthly_billing_day', 'limit']
