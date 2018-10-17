@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'billings.apps.BillingsConfig',
     'users.apps.UsersConfig',
     'wallets.apps.WalletsConfig',
+    'purchases.apps.PurchasesConfig',
 
     'rest_framework',
     'django_filters',
