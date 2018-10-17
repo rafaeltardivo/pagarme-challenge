@@ -12,7 +12,7 @@ class IsRegularUser(BasePermission):
     """Permission class for regular users only."""
 
     def has_permission(self, request, view):
-        return request.user and IsAuthenticated and not \
+        return request.user and IsAuthenticated() and not \
             request.user.is_superuser
 
 
