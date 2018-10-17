@@ -12,7 +12,7 @@ from .serializers import (
     CreditCardSerializer,
     SuperuserWalletSerializer
 )
-from .filters import WalletFilter
+from .filters import WalletFilter, CreditCardFilter
 
 from . import logger
 
@@ -79,6 +79,7 @@ class CreditCardViewSet(ModelViewSet):
     """"CRUD view for creditcards."""
     permission_classes = (IsRegularUser, )
     serializer_class = CreditCardSerializer
+    filter_class = CreditCardFilter
 
     def get_queryset(self):
         user = self.request.user
