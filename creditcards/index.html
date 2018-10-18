@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Credit Cards - Gastar.me</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Credit Cards";
+    var mkdocs_page_input_path = "creditcards.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Gastar.me</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API Documentation</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../users/">Users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../auth/">Authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../superusers/">Superusers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wallets/">Wallets</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Credit Cards</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#credit-cards-v1walletswallet_idcreditcards">Credit Cards - /v1/wallets/{wallet_id}/creditcards/</a></li>
+    
+
+    <li class="toctree-l3"><a href="#create">CREATE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example">Example</a></li>
+        
+            <li><a class="toctree-l4" href="#validations">Validations</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#retrieve">RETRIEVE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_1">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content_1">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_1">Example</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#list">LIST</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_2">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#filters">Filters</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content_2">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_2">Example</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#delete">DELETE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_3">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_3">Example</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../purchases/">Purchases</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Gastar.me</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API Documentation &raquo;</li>
+        
+      
+    
+    <li>Credit Cards</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="credit-cards-v1walletswallet_idcreditcards">Credit Cards - <code>/v1/wallets/{wallet_id}/creditcards/</code></h2>
+<table>
+<thead>
+<tr>
+<th>Permission level</th>
+<th>URL</th>
+<th>Method</th>
+<th>Format</th>
+<th>HTTP Status Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User</td>
+<td><code>/v1/wallets/{wallet_id}/creditcards/</code></td>
+<td><code>POST</code>, <code>GET</code>, <code>DELETE</code></td>
+<td><code>json</code></td>
+<td><code>200</code>, <code>201</code>, <code>204</code>, <code>400</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">CREATE</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content">Request Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Min Length</th>
+<th>Max Length</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wallet</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>1</td>
+<td>32</td>
+<td>Related wallet id</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>16</td>
+<td>16</td>
+<td>Card number</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>8</td>
+<td>26</td>
+<td>Card holder</td>
+</tr>
+<tr>
+<td><code>cvv</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>3</td>
+<td>3</td>
+<td>Card verification value</td>
+</tr>
+<tr>
+<td><code>expires_at</code></td>
+<td>Date</td>
+<td>Yes</td>
+<td>10</td>
+<td>10</td>
+<td>Card expiration date</td>
+</tr>
+<tr>
+<td><code>monthly_billing_day</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>1</td>
+<td>2</td>
+<td>Card monthly billing date</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>Decimal</td>
+<td>Yes</td>
+<td>3</td>
+<td>12</td>
+<td>Card credit limit</td>
+</tr>
+</tbody>
+</table>
+<h4 id="response-content">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wallet</code></td>
+<td>Integer</td>
+<td>Related wallet id</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>String</td>
+<td>Card number</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code></td>
+<td>String</td>
+<td>Card holder</td>
+</tr>
+<tr>
+<td><code>cvv</code></td>
+<td>String</td>
+<td>Card verification value</td>
+</tr>
+<tr>
+<td><code>expires_at</code></td>
+<td>Date</td>
+<td>Card expiration date</td>
+</tr>
+<tr>
+<td><code>monthly_billing_day</code></td>
+<td>Date</td>
+<td>Card monthly billing date</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>Decimal</td>
+<td>Card credit limit</td>
+</tr>
+<tr>
+<td><code>available</code></td>
+<td>Decimal</td>
+<td>Card credit available</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<p><strong>Event</strong>: User <code>POST</code> to <code>/v1/wallets/1/creditcards/</code><br />
+<strong>Request Content</strong>:</p>
+<pre><code>{
+    &quot;wallet&quot;: 1,
+    &quot;cardholder_name&quot;: &quot;TEST USER ONE&quot;,
+    &quot;number&quot;: &quot;4729333012967719&quot;,
+    &quot;cvv&quot;: &quot;999&quot;,
+    &quot;expires_at&quot;: &quot;2022-10-30&quot;,
+    &quot;monthly_billing_day&quot;: 9,
+    &quot;limit&quot;: &quot;900.00&quot;
+}
+</code></pre>
+
+<p><strong>HTTP Status Code</strong>: <code>201</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;id&quot;: 1,
+    &quot;number&quot;: &quot;4729333012967719&quot;,
+    &quot;cardholder_name&quot;: &quot;TEST USER ONE&quot;,
+    &quot;cvv&quot;: &quot;999&quot;,
+    &quot;expires_at&quot;: &quot;2022-10-30&quot;,
+    &quot;monthly_billing_day&quot;: 9,
+    &quot;limit&quot;: &quot;900.00&quot;,
+    &quot;available&quot;: &quot;900.00&quot;,
+    &quot;wallet&quot;: 1
+}
+</code></pre>
+
+<h4 id="validations">Validations</h4>
+<p><strong>HTTP Status Code</strong>: <code>400</code>  </p>
+<table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>number</code>: This field is required.</td>
+<td>The payload must contain a number</td>
+</tr>
+<tr>
+<td><code>number</code>: Must contain 16 digits.</td>
+<td>The card number must contain 16 digits</td>
+</tr>
+<tr>
+<td><code>number</code>: Must contain only numbers.</td>
+<td>The number must contain only numbers</td>
+</tr>
+<tr>
+<td><code>number</code>: Ensure this field has no more than 16 characters.</td>
+<td>The number must contain maximum 16 characters</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code>: This field is required.</td>
+<td>The payload must contain a cardholder_name</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code>: Must be letters and/or spaces.</td>
+<td>The cardholder_name must contain only letters and spaces</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code>: Ensure this field has no more than 26 characters.</td>
+<td>The number must contain maximum 26 characters</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code>: Must contain at least 7 characters.</td>
+<td>The number must contain at least 7 characters.</td>
+</tr>
+<tr>
+<td><code>cvv</code>: This field is required.</td>
+<td>The payload must contain a cvv</td>
+</tr>
+<tr>
+<td><code>cvv</code>: Must contain 3 digits.</td>
+<td>The cvv must contain 3 digits</td>
+</tr>
+<tr>
+<td><code>cvv</code>: Must contain only numbers.</td>
+<td>The cvv must contain only numbers</td>
+</tr>
+<tr>
+<td><code>cvv</code>: Ensure this field has no more than 3 characters.</td>
+<td>The number must contain maximum 3 characters</td>
+</tr>
+<tr>
+<td><code>expires_at</code>: This field is required.</td>
+<td>The payload must contain a expires_at</td>
+</tr>
+<tr>
+<td><code>expires_at</code>: Card already expired.</td>
+<td>The card is already expired</td>
+</tr>
+<tr>
+<td><code>monthly_billing_day</code>: This field is required.</td>
+<td>The payload must contain a monthly_billing_day</td>
+</tr>
+<tr>
+<td><code>monthly_billing_day</code>: Must be between days 1 and 20.</td>
+<td>The monthly_billing_day must be between days 1 and 20</td>
+</tr>
+<tr>
+<td><code>limit</code>: This field is required.</td>
+<td>The payload must contain a limit</td>
+</tr>
+<tr>
+<td><code>limit</code>: Must be greater than 0.</td>
+<td>The limit must be greater than 0</td>
+</tr>
+<tr>
+<td><code>wallet</code>: This field is required.</td>
+<td>The payload must contain a limit</td>
+</tr>
+<tr>
+<td><code>wallet</code>: Wallet does not belong to current user.</td>
+<td>The user can only add cards to his own wallets</td>
+</tr>
+</tbody>
+</table>
+<h2 id="retrieve">RETRIEVE</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content_1">Request Content</h4>
+<ul>
+<li>Add the wallet  and the creditcard id to the URL: <code>/v1/wallets/{wallet_id}/creditcards/{creditcard_id}/</code></li>
+</ul>
+<h4 id="response-content_1">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wallet</code></td>
+<td>Integer</td>
+<td>Related wallet id</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>String</td>
+<td>Card number</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code></td>
+<td>String</td>
+<td>Card holder</td>
+</tr>
+<tr>
+<td><code>cvv</code></td>
+<td>String</td>
+<td>Card verification value</td>
+</tr>
+<tr>
+<td><code>expires_at</code></td>
+<td>Date</td>
+<td>Card expiration date</td>
+</tr>
+<tr>
+<td><code>monthly_billing_day</code></td>
+<td>Date</td>
+<td>Card monthly billing date</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>Decimal</td>
+<td>Card credit limit</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_1">Example</h4>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/wallets/1/creditcards/1/</code><br />
+<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>HTTP Status Code</strong>: <code>200</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;id&quot;: 1,
+    &quot;number&quot;: &quot;4729333012967724&quot;,
+    &quot;cardholder_name&quot;: &quot;JOHN DOE&quot;,
+    &quot;cvv&quot;: &quot;999&quot;,
+    &quot;expires_at&quot;: &quot;2018-11-30&quot;,
+    &quot;monthly_billing_day&quot;: 19,
+    &quot;limit&quot;: &quot;100.00&quot;,
+    &quot;wallet&quot;: 1
+}
+</code></pre>
+
+<h2 id="list">LIST</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content_2">Request Content</h4>
+<ul>
+<li>None</li>
+</ul>
+<h4 id="filters">Filters</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>expires_at_min</code></td>
+<td>Date</td>
+<td>No</td>
+<td>Filter by minimum date of expiration</td>
+</tr>
+<tr>
+<td><code>expires_at_max</code></td>
+<td>Date</td>
+<td>No</td>
+<td>Filter by maximum date of expiration</td>
+</tr>
+<tr>
+<td><code>limit_min</code></td>
+<td>Decimal</td>
+<td>No</td>
+<td>Filter by minimum limit</td>
+</tr>
+<tr>
+<td><code>limit_max</code></td>
+<td>Decimal</td>
+<td>No</td>
+<td>Filter by maximum limit</td>
+</tr>
+</tbody>
+</table>
+<h4 id="response-content_2">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wallet</code></td>
+<td>Integer</td>
+<td>Related wallet id</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>String</td>
+<td>Card number</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code></td>
+<td>String</td>
+<td>Card holder</td>
+</tr>
+<tr>
+<td><code>cvv</code></td>
+<td>String</td>
+<td>Card verification value</td>
+</tr>
+<tr>
+<td><code>expires_at</code></td>
+<td>Date</td>
+<td>Card expiration date</td>
+</tr>
+<tr>
+<td><code>monthly_billing_day</code></td>
+<td>Date</td>
+<td>Card monthly billing date</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>Decimal</td>
+<td>Card credit limit</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_2">Example</h4>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/wallets/1/creditcards/</code><br />
+<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>HTTP Status Code</strong>: <code>200</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;count&quot;: 2,
+    &quot;next&quot;: null,
+    &quot;previous&quot;: null,
+    &quot;results&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;number&quot;: &quot;4729333012967724&quot;,
+            &quot;cardholder_name&quot;: &quot;JOHN DOE&quot;,
+            &quot;cvv&quot;: &quot;999&quot;,
+            &quot;expires_at&quot;: &quot;2018-11-30&quot;,
+            &quot;monthly_billing_day&quot;: 19,
+            &quot;limit&quot;: &quot;100.00&quot;,
+            &quot;wallet&quot;: 1
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;number&quot;: &quot;4729333012967784&quot;,
+            &quot;cardholder_name&quot;: &quot;JOHN DOE&quot;,
+            &quot;cvv&quot;: &quot;999&quot;,
+            &quot;expires_at&quot;: &quot;2018-11-30&quot;,
+            &quot;monthly_billing_day&quot;: 19,
+            &quot;limit&quot;: &quot;100.00&quot;,
+            &quot;wallet&quot;: 1
+        },
+    ]
+}
+</code></pre>
+
+<h2 id="delete">DELETE</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content_3">Request Content</h4>
+<ul>
+<li>Add the wallet id to the URL: <code>/v1/wallets/{wallet_id}/creditcards/{creditcard_id}/</code></li>
+</ul>
+<h4 id="example_3">Example</h4>
+<p><strong>Event</strong>: User <code>DELETE</code> to <code>/v1/wallets/1/creditcards/1/</code><br />
+<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>HTTP Status Code</strong>: <code>204</code><br />
+<strong>Response Content</strong>: <code>None</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../purchases/" class="btn btn-neutral float-right" title="Purchases">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../wallets/" class="btn btn-neutral" title="Wallets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../wallets/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../purchases/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

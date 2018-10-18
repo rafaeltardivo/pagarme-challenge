@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Superusers - Gastar.me</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Superusers";
+    var mkdocs_page_input_path = "superusers.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Gastar.me</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API Documentation</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../users/">Users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../auth/">Authentication</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Superusers</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#superusers-v1userssuperusers">Superusers  - /v1/users/superusers/</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#observation">Observation</a></li>
+        
+            <li><a class="toctree-l4" href="#create">CREATE</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wallets/">Wallets</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../creditcards/">Credit Cards</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../purchases/">Purchases</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Gastar.me</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API Documentation &raquo;</li>
+        
+      
+    
+    <li>Superusers</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="superusers-v1userssuperusers">Superusers  - <code>/v1/users/superusers/</code></h2>
+<h4 id="observation">Observation</h4>
+<p><strong>Superusers can only be created by  other superusers</strong>, so follow <a href="https://docs.djangoproject.com/en/2.1/intro/tutorial02/#creating-an-admin-user">these</a> steps do create the first superuser and then you will be able to create others using the API.</p>
+<table>
+<thead>
+<tr>
+<th>Permission level</th>
+<th>URL</th>
+<th>Method</th>
+<th>Format</th>
+<th>HTTP Status Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Superuser</td>
+<td><code>/v1/users/superusers/</code></td>
+<td><code>POST</code></td>
+<td><code>json</code></td>
+<td><code>201</code>, <code>400</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="create">CREATE</h3>
+<p><strong> Permission required </strong>: Superuser</p>
+<h4 id="request-content">Request Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Min Length</th>
+<th>Max Length</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>8</td>
+<td>100</td>
+<td>User's name</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>Email Field</td>
+<td>Yes</td>
+<td>8</td>
+<td>100</td>
+<td>User's email</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>8</td>
+<td>128</td>
+<td>User's password</td>
+</tr>
+</tbody>
+</table>
+<h4 id="response-content">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>User's name</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>Email Field</td>
+<td>User's email</td>
+</tr>
+<tr>
+<td><code>is_superuser</code></td>
+<td>Boolean</td>
+<td>User's access level</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<p><strong>Event</strong>: Superuser <code>POST</code> to <code>/v1/users/superusers/</code><br />
+<strong>Request Content</strong>: </p>
+<pre><code>{
+    &quot;name&quot;: &quot;John Super Doe&quot;,
+    &quot;email&quot;: &quot;jonhsuperdoe@email.com&quot;,
+    &quot;password&quot;: &quot;1234ABCD&quot;
+}
+
+</code></pre>
+
+<p><strong>HTTP Status Code</strong>:  <code>201</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;jonhdoeqa@email.com&quot;,
+    &quot;is_superuser&quot;: &quot;True&quot;
+}
+</code></pre>
+
+<h4 id="validations">Validations</h4>
+<p><strong>HTTP Status Code</strong>: <code>400</code>  </p>
+<table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code>: User with this email already exists.</td>
+<td>Email is unique</td>
+</tr>
+<tr>
+<td><code>email</code>: This field is required.</td>
+<td>The payload must contain an email</td>
+</tr>
+<tr>
+<td><code>email</code>: Enter a valid email address..</td>
+<td>The payload must contain a valid email address</td>
+</tr>
+<tr>
+<td><code>email</code>: Ensure this field has no more than 100 characters.</td>
+<td>The email must contain maximum 100 characters</td>
+</tr>
+<tr>
+<td><code>name</code>: This field is required.</td>
+<td>The payload must contain a name</td>
+</tr>
+<tr>
+<td><code>name</code>: Must contain at least 8 characters.</td>
+<td>The name must contain at least 8 characters</td>
+</tr>
+<tr>
+<td><code>name</code>: Ensure this field has no more than 100 characters.</td>
+<td>The name must contain maximum 100 characters</td>
+</tr>
+<tr>
+<td><code>password</code>: This field is required.</td>
+<td>The payload must contain a password</td>
+</tr>
+<tr>
+<td><code>password</code>: This password is too common.</td>
+<td>The password must be more complex</td>
+</tr>
+<tr>
+<td><code>password</code>: This password is too short. It must contain at least 8 characters.</td>
+<td>The password must contain at least 8 characters</td>
+</tr>
+<tr>
+<td><code>password</code>: This password is entirely numeric.</td>
+<td>The password must contain letters and numbers.</td>
+</tr>
+<tr>
+<td><code>password</code>: Ensure this field has no more than 128 characters.</td>
+<td>The email must contain maximum 128 characters</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../wallets/" class="btn btn-neutral float-right" title="Wallets">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../auth/" class="btn btn-neutral" title="Authentication"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../auth/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../wallets/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

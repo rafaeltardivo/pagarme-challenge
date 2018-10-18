@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Wallets - Gastar.me</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Wallets";
+    var mkdocs_page_input_path = "wallets.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Gastar.me</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API Documentation</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../users/">Users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../auth/">Authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../superusers/">Superusers</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Wallets</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#wallets-v1wallets">Wallets - /v1/wallets/</a></li>
+    
+
+    <li class="toctree-l3"><a href="#create">CREATE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example">Example</a></li>
+        
+            <li><a class="toctree-l4" href="#validations">Validations</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#retrieve">RETRIEVE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_1">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content_1">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_1">Example</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#list">LIST</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_2">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#filters">Filters</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content_2">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_2">Example</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#delete">DELETE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_3">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_3">Example</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../creditcards/">Credit Cards</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../purchases/">Purchases</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Gastar.me</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API Documentation &raquo;</li>
+        
+      
+    
+    <li>Wallets</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="wallets-v1wallets">Wallets - <code>/v1/wallets/</code></h2>
+<table>
+<thead>
+<tr>
+<th>Permission level</th>
+<th>URL</th>
+<th>Method</th>
+<th>Format</th>
+<th>HTTP Status Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User</td>
+<td><code>/v1/wallets/</code></td>
+<td><code>POST</code>, <code>GET</code></td>
+<td><code>json</code></td>
+<td><code>200</code>, <code>201</code>, <code>400</code></td>
+</tr>
+<tr>
+<td>Superuser</td>
+<td><code>/v1/wallets/</code></td>
+<td><code>GET</code>, <code>DELETE</code></td>
+<td><code>json</code></td>
+<td><code>200</code>, <code>204</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">CREATE</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content">Request Content</h4>
+<ul>
+<li>No content</li>
+</ul>
+<h4 id="response-content">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>Wallet's id</td>
+</tr>
+<tr>
+<td><code>credit_limit</code></td>
+<td>Decimal</td>
+<td>Wallet's limit</td>
+</tr>
+<tr>
+<td><code>credit_available</code></td>
+<td>Decimal</td>
+<td>Current available credit</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>Timestamp</td>
+<td>Date and time fo the creation</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example">Example</h4>
+<p><strong>Event</strong>: User <code>POST</code> to <code>/v1/wallets/</code><br />
+<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>HTTP Status Code</strong>: <code>201</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;id&quot;: 1,
+    &quot;credit_limit&quot;: &quot;0.00&quot;,
+    &quot;credit_available&quot;: &quot;0.00&quot;,
+    &quot;created_at&quot;: &quot;2018-10-14T11:17:26.702134-03:00&quot;
+}
+</code></pre>
+
+<h4 id="validations">Validations</h4>
+<p><strong>HTTP Status Code</strong>: <code>400</code>  </p>
+<table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user</code>: Already has a wallet.</td>
+<td>Every user must have only one wallet</td>
+</tr>
+</tbody>
+</table>
+<h2 id="retrieve">RETRIEVE</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content_1">Request Content</h4>
+<ul>
+<li>Add the wallet id to the URL: <code>/v1/wallets/{wallet_id}/</code></li>
+</ul>
+<h4 id="response-content_1">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>Wallet's id</td>
+</tr>
+<tr>
+<td><code>credit_limit</code></td>
+<td>Decimal</td>
+<td>Wallet's limit</td>
+</tr>
+<tr>
+<td><code>credit_available</code></td>
+<td>Decimal</td>
+<td>Current available credit</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>Timestamp</td>
+<td>Date and time fo the creation</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_1">Example</h4>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/wallets/1/</code><br />
+<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>HTTP Status Code</strong>: <code>200</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;id&quot;: 1,
+    &quot;credit_limit&quot;: &quot;0.00&quot;,
+    &quot;credit_available&quot;: &quot;0.00&quot;,
+    &quot;created_at&quot;: &quot;2018-10-14T11:18:26.702134-03:00&quot;
+}
+</code></pre>
+
+<h2 id="list">LIST</h2>
+<p><strong> Permission required </strong>: Superuser</p>
+<h4 id="request-content_2">Request Content</h4>
+<ul>
+<li>None</li>
+</ul>
+<h4 id="filters">Filters</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user</code></td>
+<td>Integer</td>
+<td>No</td>
+<td>Filter by user id</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>No</td>
+<td>Filter by id</td>
+</tr>
+</tbody>
+</table>
+<h4 id="response-content_2">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>Wallet's id</td>
+</tr>
+<tr>
+<td><code>credit_limit</code></td>
+<td>Decimal</td>
+<td>Wallet's limit</td>
+</tr>
+<tr>
+<td><code>credit_available</code></td>
+<td>Decimal</td>
+<td>Current available credit</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>Timestamp</td>
+<td>Date and time fo the creation</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_2">Example</h4>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/wallets/</code><br />
+<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>HTTP Status Code</strong>: <code>200</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;count&quot;: 2,
+    &quot;next&quot;: null,
+    &quot;previous&quot;: null,
+    &quot;results&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;credit_limit&quot;: &quot;0.00&quot;,
+            &quot;credit_available&quot;: &quot;0.00&quot;,
+            &quot;created_at&quot;: &quot;2018-10-15T17:10:29.481854-03:00&quot;,
+            &quot;user&quot;: 9
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;credit_limit&quot;: &quot;0.00&quot;,
+            &quot;credit_available&quot;: &quot;0.00&quot;,
+            &quot;created_at&quot;: &quot;2018-10-15T17:44:03.746431-03:00&quot;,
+            &quot;user&quot;: 10
+        }
+    ]
+}
+</code></pre>
+
+<h2 id="delete">DELETE</h2>
+<p><strong> Permission required </strong>: Superuser</p>
+<h4 id="request-content_3">Request Content</h4>
+<ul>
+<li>Add the wallet id to the URL: <code>/v1/wallets/{wallet_id}/</code></li>
+</ul>
+<h4 id="example_3">Example</h4>
+<p><strong>Event</strong>: User <code>DELETE</code> to <code>/v1/wallets/1/</code><br />
+<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>HTTP Status Code</strong>: <code>204</code><br />
+<strong>Response Content</strong>: <code>None</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../creditcards/" class="btn btn-neutral float-right" title="Credit Cards">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../superusers/" class="btn btn-neutral" title="Superusers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../superusers/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../creditcards/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
