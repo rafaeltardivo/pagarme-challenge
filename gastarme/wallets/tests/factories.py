@@ -14,8 +14,8 @@ class WalletFactory(factory.django.DjangoModelFactory):
         model = Wallet
 
     user = factory.SubFactory(UserFactory)
-    credit_limit = Decimal('750.00')
-    credit_available = Decimal('350.00')
+    credit_limit = Decimal('0.00')
+    credit_available = Decimal('0.00')
 
 
 class CreditCardFactory(factory.django.DjangoModelFactory):
