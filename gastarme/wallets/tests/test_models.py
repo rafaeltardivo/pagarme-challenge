@@ -14,7 +14,7 @@ class WalletModelTestCase(TestCase):
         self.assertIsInstance(wallet, Wallet)
 
     def test_str(self):
-        expected_result = 'User: name@test.com limit: 750.00 available: 350.00'
+        expected_result = 'User: name@test.com limit: 0.00 available: 0.00'
         wallet = WalletFactory()
 
         self.assertEqual(str(wallet), expected_result)
@@ -29,8 +29,8 @@ class CreditCardModelTestCase(TestCase):
         self.assertIsInstance(credit_card, CreditCard)
 
     def test_str(self):
-        expected_result = ('Wallet: User: name@test.com limit: 750.00 '
-                           'available: 350.00 number: 4729333912967716 '
+        expected_result = ('Wallet: User: name@test.com limit: 500.00 '
+                           'available: 500.00 number: 4729333912967716 '
                            'limit: 500.00 monthly_billing_day: 10')
         credit_card = CreditCardFactory(number='4729333912967716')
 
