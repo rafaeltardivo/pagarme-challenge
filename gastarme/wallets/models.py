@@ -20,7 +20,7 @@ class Wallet(models.Model):
     credit_available = models.DecimalField(
         max_digits=8,
         decimal_places=2,
-        default=Decimal('0.00')
+        null=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
