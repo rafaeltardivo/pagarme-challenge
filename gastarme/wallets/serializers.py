@@ -105,4 +105,4 @@ class CreditCardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CreditCard
-        exclude = ('available',)
+        fields = '__all__'
