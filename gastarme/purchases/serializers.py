@@ -1,9 +1,18 @@
 from rest_framework import serializers
-from .models import Purchase
+from .models import Purchase, Payment
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    """Serializer for the payment model."""
+
+    class Meta:
+        model = Payment
+        fields = ('value', 'credit_card')
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
     """Serializer for the purchase model."""
+    payments = PaymentSerializer(many=True, read_only=True)
 
     def validate_value(self, value):
         if not value:
