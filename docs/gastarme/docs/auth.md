@@ -10,10 +10,11 @@
 ** Permission required **: None
 #### Request Content
 
-|  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
-|---|---|---|---|---|---|
-| `email` |  Email Field |  Yes | 8  | 100  | User's email  |
-| `password` |  String |  Yes | 8  | 128  | User's password  |
+|  Field |  Type |  Required |  Detail |
+|---|---|---|---|
+| `email`  | Email field  | Yes  |  User's email |
+| `password`  |  String | Yes  |  User's password |
+
 
 #### Response Content
 |  Field | Type  |Detail   |
@@ -46,18 +47,18 @@
 #### Validations
 **HTTP Status Code**: `400`  
 
-| Content  | Detail  |
-|---|---|
-| `email`: This field is required. |  The payload must contain an email |
-| `password`: This field is required. |  The payload must contain a password |
+| Field  | Content  |  Detail |
+|---|---|---|
+| `email`  |  This field is required. | The payload must contain an email |
+| `password`| This field is required. | The payload must contain a password  |
 
 ### REFRESH
 ** Permission required **: None
 #### Request Content
 
-|  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
-|---|---|---|---|---|---|
-| `token` |  String |  Yes | 128 | 256  | User's token  |
+|  Field |  Type |  Required |  Detail |
+|---|---|---|---|
+| `token`  | String | Yes  |  User's token  |
 
 
 #### Response Content
@@ -90,7 +91,7 @@
 #### Validations
 **HTTP Status Code**: `400`  
 
-| Content  | Detail  |
-|---|---|
-| `non_field_errors`: Error decoding signature. |  The token is invalid |
-| `non_field_errors`: Signature has expired. |  The token has expired |
+| Field  | Content  |  Detail |
+|---|---|---|
+| `non_field_errors`  |  Error decoding signature. |  The token is invalid |
+| `non_field_errors`|  Signature has expired. | The token has expired  |

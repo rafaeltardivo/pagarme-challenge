@@ -7,5 +7,6 @@ nav:
       - Superusers: superusers.md
       - Wallets: wallets.md
       - Credit Cards: creditcards.md
+      - Purchases: purchases.md
 theme: readthedocs
 

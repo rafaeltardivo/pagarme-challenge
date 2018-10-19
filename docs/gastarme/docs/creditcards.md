@@ -13,7 +13,7 @@
 |---|---|---|---|---|---|
 | `wallet` |  Integer |  Yes |  1 |  32 |  Related wallet id |
 | `number` |  String |  Yes |  16 |  16 |  Card number |
-| `cardholder_name` |  String |  Yes | 8  | 26  | Card holder  |
+| `cardholder_name` |  String |  Yes | 7  | 26  | Card holder  |
 | `cvv` |  String |  Yes | 3  | 3  | Card verification value  |
 | `expires_at` |  Date |  Yes | 10  | 10  | Card expiration date  |
 | `monthly_billing_day` |  Integer |  Yes | 1  | 2  | Card monthly billing date  |
@@ -22,6 +22,7 @@
 #### Response Content
 |  Field | Type  |Detail   |
 |---|---|---|
+| `id` |  Integer | Created credit card id |
 | `wallet` |  Integer | Related wallet id |
 | `number` |  String | Card number |
 | `cardholder_name` | String |  Card holder  |
@@ -29,6 +30,7 @@
 | `expires_at` |  Date | Card expiration date  |
 | `monthly_billing_day` | Date | Card monthly billing date  |
 | `limit` |  Decimal | Card credit limit  |
+| `available` |  Decimal | Card credit available |
 
 #### Example
 
@@ -57,35 +59,37 @@
 	"expires_at": "2022-10-30",
 	"monthly_billing_day": 9,
 	"limit": "900.00",
+	"available": "900.00",
 	"wallet": 1
 }
 ```
 
+
 #### Validations
 **HTTP Status Code**: `400`  
 
-| Content  | Detail  |
-|---|---|
-| `number`: This field is required.  | The payload must contain a number |
-| `number`: Must contain 16 digits.  | The card number must contain 16 digits |
-| `number`: Must contain only numbers.  | The number must contain only numbers |
-| `number`: Ensure this field has no more than 16 characters. |  The number must contain maximum 16 characters |
-| `cardholder_name`: This field is required.  | The payload must contain a cardholder_name |
-| `cardholder_name`: Must be letters and/or spaces.  | The cardholder_name must contain only letters and spaces |
-| `cardholder_name`: Ensure this field has no more than 26 characters. |  The number must contain maximum 26 characters |
-| `cardholder_name`: Must contain at least 7 characters. |  The number must contain at least 7 characters. |
-| `cvv`: This field is required.  | The payload must contain a cvv |
-| `cvv`: Must contain 3 digits.  | The cvv must contain 3 digits |
-| `cvv`: Must contain only numbers.  | The cvv must contain only numbers |
-| `cvv`: Ensure this field has no more than 3 characters. |  The number must contain maximum 3 characters |
-| `expires_at`: This field is required.  | The payload must contain a expires_at |
-| `expires_at`: Card already expired.  | The card is already expired |
-| `monthly_billing_day`: This field is required.  | The payload must contain a monthly_billing_day |
-| `monthly_billing_day`: Must be between days 1 and 20.  | The monthly_billing_day must be between days 1 and 20 |
-| `limit`: This field is required.  | The payload must contain a limit |
-| `limit`: Must be greater than 0.  | The limit must be greater than 0 |
-| `wallet`: This field is required.  | The payload must contain a limit |
-| `wallet`: Wallet does not belong to current user.  | The user can only add cards to his own wallets |
+|  Field | Content  | Detail  |
+|---|---|---|
+| `number` |  This field is required. | The payload must contain a number  |
+| `number`  |  Must contain only numbers.  | The card number must contain only numbers  |
+| `number`  |  Ensure this field has no more than 16 characters | The number must contain maximum 16 characters  |
+| `number` | Must contain 16 digits.  |  The number must contain exactly 16 digits |
+| `cardholder_name` | This field is required.   | The payload must contain a cardholder_name  |
+| `cardholder_name` | Must be letters and/or spaces.  | The cardholder_name must contain only letters and spaces  |
+| `cardholder_name` | Ensure this field has no more than 26 characters.  | The number must contain maximum 26 characters  |
+| `cardholder_name` |  Must contain at least 7 characters.  | The number must contain at least 7 characters  |
+| `cvv`  | This field is required.  | The payload must contain a cvv  |
+| `cvv` | Must contain 3 digits.   | The cvv must contain 3 digits  |
+| `cvv`  |  Must contain only numbers. | The cvv must contain only numbers  |
+| `cvv` | Ensure this field has no more than 3 characters.  | The number must contain maximum 3 characters  |
+| `expires_at` | This field is required.  |  The payload must contain a expires_at |
+| `expires_at`  | Card already expired.  | The card is already expired  |
+| `monthly_billing_day`  | This field is required.  | The payload must contain a monthly_billing_day  |
+| `monthly_billing_day`  | Must be between days 1 and 20.  | The monthly_billing_day must be between days 1 and 20  |
+| `limit` | This field is required.  | The payload must contain a limit  |
+| `limit` | Must be greater than 0.  | The limit must be greater than 0  |
+| `wallet`  | This field is required  | The payload must contain a limit  |
+| `wallet`  | Wallet does not belong to current user  | The user can only add cards to his own wallets  |
 
 
 ##RETRIEVE
