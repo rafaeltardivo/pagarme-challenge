@@ -1,7 +1,11 @@
-from django.urls import path
-from .views import PurchaseCreateView
+from django.conf.urls import url, include
+from rest_framework_nested import routers
 
+from .views import PurchaseViewSet
+
+router = routers.SimpleRouter()
+router.register('', PurchaseViewSet, base_name='purchases')
 
 urlpatterns = [
-    path('', PurchaseCreateView.as_view(), name='purchase_create'),
+    url('', include(router.urls)),
 ]
