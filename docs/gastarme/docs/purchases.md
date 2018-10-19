@@ -20,6 +20,8 @@
 #### Response Content
 |  Field | Type  |Detail   |
 |---|---|---|
+|  `id`|  Integer |  Created purchase id|
+|  `payments`|  List |  A collection of payments|
 |  `wallet`|  Integer |  Related wallet id|
 |  `credit_limit` | Decimal  |  Purchase value |
 |  `made_at`|  Timestamp |  Date and time of the purchase |
@@ -39,9 +41,15 @@
 **Response Content**:
 ```
 {
-	"id": 3,
+	"id": 2,
+	"payments": [
+		{
+			"value": "150.00",
+			"credit_card": 1
+		}
+	],
 	"value": "150.00",
-	"made_at": "2018-10-18T10:53:52.204568-03:00",
+	"made_at": "2018-10-19T13:08:47.846428-03:00",
 	"wallet": 1
 }
 ```
@@ -49,9 +57,109 @@
 #### Validations
 **HTTP Status Code**: `400`  
 
-| Content  | Detail  |
-|---|---|
-| `wallet`: Wallet does not belong to current user  | You must user your own wallet |
-| `wallet`: Must first have credit cards  | In order to make a purchase, you mus first have credit cards |
-| `value`: Must be greater than 0  | The purchase value must be greater than 0 |
-| `value`: Value exceeds your credit available  | The purchase value exceeds the credit limit of your wallett |
+| Field  | Content  |  Detail |
+|---|---|---|
+| `wallet`  | Wallet does not belong to current user. |  You must user your own wallet |
+| `wallet`  | Must first have credit cards. |  In order to make a purchase, you mus first have credit cards |
+| `email`|  This field is required. | The payload must contain a valid email address  |
+| `email` | Enter a valid email address.  | The email must have between 6 and 100 characters  |
+
+
+##RETRIEVE
+** Permission required **: User
+#### Request Content
+ - Add the purchase id to the URL: `/v1/purchases/{1}/`
+
+#### Response Content
+|  Field | Type  |Detail   |
+|---|---|---|
+|  `id`|  Integer |  Created purchase id|
+|  `payments`|  List |  A collection of payments|
+|  `wallet`|  Integer |  Related wallet id|
+|  `credit_limit` | Decimal  |  Purchase value |
+|  `made_at`|  Timestamp |  Date and time of the purchase |
+
+#### Example
+
+**Event**: User `GET` to `/v1/wallets/1/`  
+**Request Content**:  None
+
+**HTTP Status Code**: `200`  
+**Response Content**:
+```
+{
+	"id": 1,
+	"payments": [
+		{
+			"value": "150.00",
+			"credit_card": 1
+		}
+	],
+	"value": "150.00",
+	"made_at": "2018-10-19T13:08:47.846428-03:00",
+	"wallet": 1
+}
+```
+
+##LIST
+** Permission required **: User
+#### Request Content
+ - None
+
+#### Filters
+
+| Field  | Type  | Required  | Detail  |
+|---|---|---|---|
+| `made_at_at_min`  | Date  |  No |  Filter by minimum date of purchase |
+| `made_at_max`  | Date  |  No |  Filter by maximum date of purchase |
+
+#### Response Content
+|  Field | Type  |Detail   |
+|---|---|---|
+|  `id`|  Integer |  Created purchase id|
+|  `payments`|  List |  A collection of payments|
+|  `wallet`|  Integer |  Related wallet id|
+|  `credit_limit` | Decimal  |  Purchase value |
+|  `made_at`|  Timestamp |  Date and time of the purchase |
+
+#### Example
+
+**Event**: User `GET` to `/v1/wallets/`  
+**Request Content**:  None
+
+
+**HTTP Status Code**: `200`  
+**Response Content**:
+```
+{
+	"count": 2,
+	"next": null,
+	"previous": null,
+	"results": [
+		{
+			"id": 1,
+			"payments": [
+				{
+					"value": "200.00",
+					"credit_card": 1
+				}
+			],
+			"value": "200.00",
+			"made_at": "2018-10-19T11:01:51.621101-03:00",
+			"wallet": 1
+		},
+		{
+			"id": 2,
+			"payments": [
+				{
+					"value": "150.00",
+					"credit_card": 1
+				}
+			],
+			"value": "150.00",
+			"made_at": "2018-10-19T13:08:47.846428-03:00",
+			"wallet": 1
+		}
+	]
+}
+```

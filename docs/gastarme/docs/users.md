@@ -12,7 +12,7 @@
 
 |  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
 |---|---|---|---|---|---|
-|  `name` |  String |  Yes |  8 |  100 |  User's name |
+| `name` |  String |  Yes |  8 |  100 |  User's name |
 | `email` |  Email Field |  Yes | 6  | 100  | User's email  |
 | `password` |  String |  Yes | 8  | 128  | User's password  |
 
