@@ -124,7 +124,7 @@
 
 #### Example
 
-**Event**: User `GET` to `/v1/wallets/`  
+**Event**: User `GET` to `/v1/purchases/`  
 **Request Content**:  None
 
 
