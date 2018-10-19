@@ -236,7 +236,7 @@
 <td><code>cardholder_name</code></td>
 <td>String</td>
 <td>Yes</td>
-<td>8</td>
+<td>7</td>
 <td>26</td>
 <td>Card holder</td>
 </tr>
@@ -284,6 +284,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>Created credit card id</td>
+</tr>
 <tr>
 <td><code>wallet</code></td>
 <td>Integer</td>
@@ -360,89 +365,110 @@
 <table>
 <thead>
 <tr>
+<th>Field</th>
 <th>Content</th>
 <th>Detail</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>number</code>: This field is required.</td>
+<td><code>number</code></td>
+<td>This field is required.</td>
 <td>The payload must contain a number</td>
 </tr>
 <tr>
-<td><code>number</code>: Must contain 16 digits.</td>
-<td>The card number must contain 16 digits</td>
+<td><code>number</code></td>
+<td>Must contain only numbers.</td>
+<td>The card number must contain only numbers</td>
 </tr>
 <tr>
-<td><code>number</code>: Must contain only numbers.</td>
-<td>The number must contain only numbers</td>
-</tr>
-<tr>
-<td><code>number</code>: Ensure this field has no more than 16 characters.</td>
+<td><code>number</code></td>
+<td>Ensure this field has no more than 16 characters</td>
 <td>The number must contain maximum 16 characters</td>
 </tr>
 <tr>
-<td><code>cardholder_name</code>: This field is required.</td>
+<td><code>number</code></td>
+<td>Must contain 16 digits.</td>
+<td>The number must contain exactly 16 digits</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code></td>
+<td>This field is required.</td>
 <td>The payload must contain a cardholder_name</td>
 </tr>
 <tr>
-<td><code>cardholder_name</code>: Must be letters and/or spaces.</td>
+<td><code>cardholder_name</code></td>
+<td>Must be letters and/or spaces.</td>
 <td>The cardholder_name must contain only letters and spaces</td>
 </tr>
 <tr>
-<td><code>cardholder_name</code>: Ensure this field has no more than 26 characters.</td>
+<td><code>cardholder_name</code></td>
+<td>Ensure this field has no more than 26 characters.</td>
 <td>The number must contain maximum 26 characters</td>
 </tr>
 <tr>
-<td><code>cardholder_name</code>: Must contain at least 7 characters.</td>
-<td>The number must contain at least 7 characters.</td>
+<td><code>cardholder_name</code></td>
+<td>Must contain at least 7 characters.</td>
+<td>The number must contain at least 7 characters</td>
 </tr>
 <tr>
-<td><code>cvv</code>: This field is required.</td>
+<td><code>cvv</code></td>
+<td>This field is required.</td>
 <td>The payload must contain a cvv</td>
 </tr>
 <tr>
-<td><code>cvv</code>: Must contain 3 digits.</td>
+<td><code>cvv</code></td>
+<td>Must contain 3 digits.</td>
 <td>The cvv must contain 3 digits</td>
 </tr>
 <tr>
-<td><code>cvv</code>: Must contain only numbers.</td>
+<td><code>cvv</code></td>
+<td>Must contain only numbers.</td>
 <td>The cvv must contain only numbers</td>
 </tr>
 <tr>
-<td><code>cvv</code>: Ensure this field has no more than 3 characters.</td>
+<td><code>cvv</code></td>
+<td>Ensure this field has no more than 3 characters.</td>
 <td>The number must contain maximum 3 characters</td>
 </tr>
 <tr>
-<td><code>expires_at</code>: This field is required.</td>
+<td><code>expires_at</code></td>
+<td>This field is required.</td>
 <td>The payload must contain a expires_at</td>
 </tr>
 <tr>
-<td><code>expires_at</code>: Card already expired.</td>
+<td><code>expires_at</code></td>
+<td>Card already expired.</td>
 <td>The card is already expired</td>
 </tr>
 <tr>
-<td><code>monthly_billing_day</code>: This field is required.</td>
+<td><code>monthly_billing_day</code></td>
+<td>This field is required.</td>
 <td>The payload must contain a monthly_billing_day</td>
 </tr>
 <tr>
-<td><code>monthly_billing_day</code>: Must be between days 1 and 20.</td>
+<td><code>monthly_billing_day</code></td>
+<td>Must be between days 1 and 20.</td>
 <td>The monthly_billing_day must be between days 1 and 20</td>
 </tr>
 <tr>
-<td><code>limit</code>: This field is required.</td>
+<td><code>limit</code></td>
+<td>This field is required.</td>
 <td>The payload must contain a limit</td>
 </tr>
 <tr>
-<td><code>limit</code>: Must be greater than 0.</td>
+<td><code>limit</code></td>
+<td>Must be greater than 0.</td>
 <td>The limit must be greater than 0</td>
 </tr>
 <tr>
-<td><code>wallet</code>: This field is required.</td>
+<td><code>wallet</code></td>
+<td>This field is required</td>
 <td>The payload must contain a limit</td>
 </tr>
 <tr>
-<td><code>wallet</code>: Wallet does not belong to current user.</td>
+<td><code>wallet</code></td>
+<td>Wallet does not belong to current user</td>
 <td>The user can only add cards to his own wallets</td>
 </tr>
 </tbody>

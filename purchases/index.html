@@ -100,6 +100,34 @@
         </ul>
     
 
+    <li class="toctree-l3"><a href="#retrieve">RETRIEVE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_1">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content_1">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_1">Example</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#list">LIST</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#request-content_2">Request Content</a></li>
+        
+            <li><a class="toctree-l4" href="#filters">Filters</a></li>
+        
+            <li><a class="toctree-l4" href="#response-content_2">Response Content</a></li>
+        
+            <li><a class="toctree-l4" href="#example_2">Example</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
     </ul>
@@ -206,6 +234,16 @@
 </thead>
 <tbody>
 <tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>Created purchase id</td>
+</tr>
+<tr>
+<td><code>payments</code></td>
+<td>List</td>
+<td>A collection of payments</td>
+</tr>
+<tr>
 <td><code>wallet</code></td>
 <td>Integer</td>
 <td>Related wallet id</td>
@@ -234,9 +272,15 @@
 <p><strong>HTTP Status Code</strong>: <code>201</code><br />
 <strong>Response Content</strong>:</p>
 <pre><code>{
-    &quot;id&quot;: 3,
+    &quot;id&quot;: 2,
+    &quot;payments&quot;: [
+        {
+            &quot;value&quot;: &quot;150.00&quot;,
+            &quot;credit_card&quot;: 1
+        }
+    ],
     &quot;value&quot;: &quot;150.00&quot;,
-    &quot;made_at&quot;: &quot;2018-10-18T10:53:52.204568-03:00&quot;,
+    &quot;made_at&quot;: &quot;2018-10-19T13:08:47.846428-03:00&quot;,
     &quot;wallet&quot;: 1
 }
 </code></pre>
@@ -246,29 +290,201 @@
 <table>
 <thead>
 <tr>
+<th>Field</th>
 <th>Content</th>
 <th>Detail</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>wallet</code>: Wallet does not belong to current user</td>
+<td><code>wallet</code></td>
+<td>Wallet does not belong to current user.</td>
 <td>You must user your own wallet</td>
 </tr>
 <tr>
-<td><code>wallet</code>: Must first have credit cards</td>
+<td><code>wallet</code></td>
+<td>Must first have credit cards.</td>
 <td>In order to make a purchase, you mus first have credit cards</td>
 </tr>
 <tr>
-<td><code>value</code>: Must be greater than 0</td>
-<td>The purchase value must be greater than 0</td>
+<td><code>email</code></td>
+<td>This field is required.</td>
+<td>The payload must contain a valid email address</td>
 </tr>
 <tr>
-<td><code>value</code>: Value exceeds your credit available</td>
-<td>The purchase value exceeds the credit limit of your wallett</td>
+<td><code>email</code></td>
+<td>Enter a valid email address.</td>
+<td>The email must have between 6 and 100 characters</td>
 </tr>
 </tbody>
 </table>
+<h2 id="retrieve">RETRIEVE</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content_1">Request Content</h4>
+<ul>
+<li>Add the purchase id to the URL: <code>/v1/purchases/{1}/</code></li>
+</ul>
+<h4 id="response-content_1">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>Created purchase id</td>
+</tr>
+<tr>
+<td><code>payments</code></td>
+<td>List</td>
+<td>A collection of payments</td>
+</tr>
+<tr>
+<td><code>wallet</code></td>
+<td>Integer</td>
+<td>Related wallet id</td>
+</tr>
+<tr>
+<td><code>credit_limit</code></td>
+<td>Decimal</td>
+<td>Purchase value</td>
+</tr>
+<tr>
+<td><code>made_at</code></td>
+<td>Timestamp</td>
+<td>Date and time of the purchase</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_1">Example</h4>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/wallets/1/</code><br />
+<strong>Request Content</strong>:  None</p>
+<p><strong>HTTP Status Code</strong>: <code>200</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;id&quot;: 1,
+    &quot;payments&quot;: [
+        {
+            &quot;value&quot;: &quot;150.00&quot;,
+            &quot;credit_card&quot;: 1
+        }
+    ],
+    &quot;value&quot;: &quot;150.00&quot;,
+    &quot;made_at&quot;: &quot;2018-10-19T13:08:47.846428-03:00&quot;,
+    &quot;wallet&quot;: 1
+}
+</code></pre>
+
+<h2 id="list">LIST</h2>
+<p><strong> Permission required </strong>: User</p>
+<h4 id="request-content_2">Request Content</h4>
+<ul>
+<li>None</li>
+</ul>
+<h4 id="filters">Filters</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>made_at_at_min</code></td>
+<td>Date</td>
+<td>No</td>
+<td>Filter by minimum date of purchase</td>
+</tr>
+<tr>
+<td><code>made_at_max</code></td>
+<td>Date</td>
+<td>No</td>
+<td>Filter by maximum date of purchase</td>
+</tr>
+</tbody>
+</table>
+<h4 id="response-content_2">Response Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Integer</td>
+<td>Created purchase id</td>
+</tr>
+<tr>
+<td><code>payments</code></td>
+<td>List</td>
+<td>A collection of payments</td>
+</tr>
+<tr>
+<td><code>wallet</code></td>
+<td>Integer</td>
+<td>Related wallet id</td>
+</tr>
+<tr>
+<td><code>credit_limit</code></td>
+<td>Decimal</td>
+<td>Purchase value</td>
+</tr>
+<tr>
+<td><code>made_at</code></td>
+<td>Timestamp</td>
+<td>Date and time of the purchase</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_2">Example</h4>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/purchases/</code><br />
+<strong>Request Content</strong>:  None</p>
+<p><strong>HTTP Status Code</strong>: <code>200</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;count&quot;: 2,
+    &quot;next&quot;: null,
+    &quot;previous&quot;: null,
+    &quot;results&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;payments&quot;: [
+                {
+                    &quot;value&quot;: &quot;200.00&quot;,
+                    &quot;credit_card&quot;: 1
+                }
+            ],
+            &quot;value&quot;: &quot;200.00&quot;,
+            &quot;made_at&quot;: &quot;2018-10-19T11:01:51.621101-03:00&quot;,
+            &quot;wallet&quot;: 1
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;payments&quot;: [
+                {
+                    &quot;value&quot;: &quot;150.00&quot;,
+                    &quot;credit_card&quot;: 1
+                }
+            ],
+            &quot;value&quot;: &quot;150.00&quot;,
+            &quot;made_at&quot;: &quot;2018-10-19T13:08:47.846428-03:00&quot;,
+            &quot;wallet&quot;: 1
+        }
+    ]
+}
+</code></pre>
               
             </div>
           </div>
