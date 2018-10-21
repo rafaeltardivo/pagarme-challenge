@@ -7,8 +7,8 @@ from .factories import WalletFactory, CreditCardFactory
 from users.tests.factories import UserFactory
 
 
-class TestWalletSerializer(test.APITransactionTestCase):
-    """Test cases for the Wallet serializer."""
+class TestWalletFilters(test.APITransactionTestCase):
+    """Test cases for the Wallet filters."""
 
     def setUp(self):
         self.super = UserFactory(
@@ -38,7 +38,8 @@ class TestWalletSerializer(test.APITransactionTestCase):
     def test_superuser_filter_wallet_by_id(self, logger_mock):
         self.client.force_authenticate(self.super)
         response = self.client.get(
-            reverse('wallets-list') + '?id={}'.format(self.wallet_two.id)
+            reverse('wallets-list'),
+            {'id': self.wallet_two.id}
         )
 
         self.assertEqual(response.json()['count'], 1)
@@ -49,7 +50,8 @@ class TestWalletSerializer(test.APITransactionTestCase):
     def test_superuser_filter_wallet_by_user(self, logger_mock):
         self.client.force_authenticate(self.super)
         response = self.client.get(
-            reverse('wallets-list') + '?user={}'.format(self.user_one.id)
+            reverse('wallets-list'),
+            {'user': self.user_one.id}
         )
 
         self.assertEqual(response.json()['count'], 1)
@@ -59,23 +61,22 @@ class TestWalletSerializer(test.APITransactionTestCase):
     @patch('wallets.logger.info')
     def test_superuser_filter_creditcard_by_limit_min(self, logger_mock):
         self.client.force_authenticate(self.user_one)
-        url = reverse('wallet-creditcards-list', args=[self.wallet_one.id])
 
         response = self.client.get(
-            url + '?limit_min={}'.format(self.credit_card_two.limit)
+            reverse('wallet-creditcards-list', args=[self.wallet_one.id]),
+            {'limit__gte': self.credit_card_one.limit}
         )
 
-        self.assertEqual(response.json()['count'], 1)
-        self.assertEqual(response.json()['results'][0]['id'], 2)
+        self.assertEqual(response.json()['count'], 2)
         logger_mock.assert_called()
 
     @patch('wallets.logger.info')
     def test_superuser_filter_creditcard_by_limit_max(self, logger_mock):
         self.client.force_authenticate(self.user_one)
-        url = reverse('wallet-creditcards-list', args=[self.wallet_one.id])
 
         response = self.client.get(
-            url + '?limit_max={}'.format(self.credit_card_one.limit)
+            reverse('wallet-creditcards-list', args=[self.wallet_one.id]),
+            {'limit__lte': self.credit_card_one.limit}
         )
 
         self.assertEqual(response.json()['count'], 1)
@@ -85,12 +86,24 @@ class TestWalletSerializer(test.APITransactionTestCase):
     @patch('wallets.logger.info')
     def test_superuser_filter_creditcard_by_expired_at_max(self, logger_mock):
         self.client.force_authenticate(self.user_one)
-        url = reverse('wallet-creditcards-list', args=[self.wallet_one.id])
 
         response = self.client.get(
-            url + '?expires_at_max={}'.format(self.credit_card_one.expires_at)
+            reverse('wallet-creditcards-list', args=[self.wallet_one.id]),
+            {'expires_at__lte': self.credit_card_one.expires_at}
         )
 
         self.assertEqual(response.json()['count'], 1)
         self.assertEqual(response.json()['results'][0]['id'], 1)
+        logger_mock.assert_called()
+
+    @patch('wallets.logger.info')
+    def test_superuser_filter_creditcard_by_expired_at_min(self, logger_mock):
+        self.client.force_authenticate(self.user_one)
+
+        response = self.client.get(
+            reverse('wallet-creditcards-list', args=[self.wallet_one.id]),
+            {'expires_at__gte': self.credit_card_one.expires_at}
+        )
+
+        self.assertEqual(response.json()['count'], 2)
         logger_mock.assert_called()

@@ -42,10 +42,9 @@ class TestUserView(test.APITransactionTestCase):
         response = self.client.post(
             reverse('wallets-list'),
         )
-        logger_mock.assert_called()
-
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Wallet.objects.count(), 1)
+        logger_mock.assert_called()
 
     @patch('wallets.logger.info')
     def test_user_wallet_detail(self, logger_mock):
@@ -55,21 +54,22 @@ class TestUserView(test.APITransactionTestCase):
         response = self.client.get(
             reverse('wallets-detail', args=[wallet.id]),
         )
-        logger_mock.assert_called()
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        logger_mock.assert_called()
 
     @patch('wallets.logger.info')
     def test_superuser_wallet_list(self, logger_mock):
+        WalletFactory()
         WalletFactory(user=self.user)
         self.client.force_authenticate(self.superuser)
 
         response = self.client.get(
             reverse('wallets-list'),
         )
-        logger_mock.assert_called()
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['count'], 2)
+        logger_mock.assert_called()
 
     @patch('wallets.logger.info')
     def test_superuser_wallet_delete(self, logger_mock):
@@ -79,9 +79,8 @@ class TestUserView(test.APITransactionTestCase):
         response = self.client.delete(
             reverse('wallets-detail', args=[wallet.id]),
         )
-        logger_mock.assert_called()
-
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        logger_mock.assert_called()
 
     @patch('wallets.logger.info')
     def test_user_creditcard_create(self, logger_mock):
@@ -111,29 +110,19 @@ class TestUserView(test.APITransactionTestCase):
         wallet = WalletFactory(user=self.user)
         CreditCardFactory(
             wallet=wallet,
-            cardholder_name='TEST USER ONE',
             number='4729333912967715',
-            cvv='999',
-            expires_at=date(2022, 10, 30),
-            monthly_billing_day=9,
-            limit=900.00
         )
         CreditCardFactory(
             wallet=wallet,
-            cardholder_name='TEST USER ONE',
-            number='4729333912967716',
-            cvv='999',
-            expires_at=date(2022, 10, 30),
-            monthly_billing_day=9,
-            limit=900.00
+            number='4729333922967715',
         )
         self.client.force_authenticate(self.user)
 
         response = self.client.get(
             reverse('wallet-creditcards-list', args=[wallet.id])
         )
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['count'], 2)
         logger_mock.assert_called()
 
     @patch('wallets.logger.info')
@@ -141,12 +130,7 @@ class TestUserView(test.APITransactionTestCase):
         wallet = WalletFactory(user=self.user)
         credit_card = CreditCardFactory(
             wallet=wallet,
-            cardholder_name='TEST USER ONE',
             number='4729333912967715',
-            cvv='999',
-            expires_at=date(2022, 10, 30),
-            monthly_billing_day=9,
-            limit=900.00
         )
         self.client.force_authenticate(self.user)
 
