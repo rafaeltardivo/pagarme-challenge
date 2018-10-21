@@ -139,10 +139,10 @@
 
 | Field  | Type  | Required  | Detail  |
 |---|---|---|---|
-| `expires_at_min`  | Date  |  No |  Filter by minimum date of expiration |
-| `expires_at_max`  | Date  |  No |  Filter by maximum date of expiration |
-| `limit_min` |  Decimal | No  |  Filter by minimum limit |
-| `limit_max` |  Decimal | No  |  Filter by maximum limit |
+| `expires_at__gte`  | Date  |  No |  Filter by minimum date of expiration (greater than or equal) |
+| `expires_at__lte`  | Date  |  No |  Filter by maximum date of expiration (lesser than or equal)|
+| `limit__gte` |  Decimal | No  |  Filter by minimum limit (greater than or equal)|
+| `limit__lte` |  Decimal | No  |  Filter by maximum limit (lesser than or equal)|
 
 #### Response Content
 |  Field | Type  |Detail   |

@@ -110,8 +110,8 @@
 
 | Field  | Type  | Required  | Detail  |
 |---|---|---|---|
-| `made_at_at_min`  | Date  |  No |  Filter by minimum date of purchase |
-| `made_at_max`  | Date  |  No |  Filter by maximum date of purchase |
+| `made_at__gte`  | Date  |  No |  Filter by minimum date of purchase (greater than or equal)|
+| `made_at__lte`  | Date  |  No |  Filter by maximum date of purchase (lesser than or equal)|
 
 #### Response Content
 |  Field | Type  |Detail   |
