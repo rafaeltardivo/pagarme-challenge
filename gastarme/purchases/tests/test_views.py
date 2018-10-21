@@ -7,6 +7,8 @@ from purchases.models import Purchase
 from wallets.tests.factories import WalletFactory, CreditCardFactory
 from users.tests.factories import UserFactory
 
+from .factories import PurchaseFactory
+
 
 class TestPurchaseView(test.APITransactionTestCase):
     """Test cases for the user view."""
@@ -15,10 +17,9 @@ class TestPurchaseView(test.APITransactionTestCase):
         self.user = UserFactory()
         self.user_two = UserFactory(email='test@emailtwo.com')
         self.wallet = WalletFactory(user=self.user)
-        # CreditCardFactory(wallet=self.wallet)
 
     def test_purchase_resource_url(self):
-        self.assertEqual(reverse('purchase_create'), '/v1/purchases/')
+        self.assertEqual(reverse('purchases-list'), '/v1/purchases/')
 
     @patch('purchases.logger.info')
     def test_purchase_another_wallet(self, logger_mock):
@@ -26,7 +27,7 @@ class TestPurchaseView(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
-            reverse('purchase_create'),
+            reverse('purchases-list'),
             {
                 'wallet': wallet.id,
                 'value': '100.00'
@@ -46,7 +47,7 @@ class TestPurchaseView(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
-            reverse('purchase_create'),
+            reverse('purchases-list'),
             {
                 'wallet': self.wallet.id,
                 'value': '100.00'
@@ -67,7 +68,7 @@ class TestPurchaseView(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
-            reverse('purchase_create'),
+            reverse('purchases-list'),
             {
                 'wallet': self.wallet.id,
                 'value': '1999.00'
@@ -88,7 +89,7 @@ class TestPurchaseView(test.APITransactionTestCase):
         self.client.force_authenticate(self.user)
 
         response = self.client.post(
-            reverse('purchase_create'),
+            reverse('purchases-list'),
             {
                 'wallet': self.wallet.id,
                 'value': '100.00'
@@ -98,4 +99,30 @@ class TestPurchaseView(test.APITransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Purchase.objects.count(), 1)
+        logger_mock.assert_called()
+
+    @patch('purchases.logger.info')
+    def test_purchase_detail(self, logger_mock):
+        purchase = PurchaseFactory(wallet=self.wallet)
+        self.client.force_authenticate(self.user)
+
+        response = self.client.get(
+            reverse('purchases-detail', args=[purchase.id])
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        logger_mock.assert_called()
+
+    @patch('purchases.logger.info')
+    def test_purchase_list(self, logger_mock):
+        PurchaseFactory(wallet=self.wallet)
+        PurchaseFactory(wallet=self.wallet)
+        self.client.force_authenticate(self.user)
+
+        response = self.client.get(
+            reverse('purchases-list')
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Purchase.objects.count(), 2)
         logger_mock.assert_called()
