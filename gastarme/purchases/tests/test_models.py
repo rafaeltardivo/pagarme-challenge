@@ -1,9 +1,10 @@
 from django.test import TestCase
 from freezegun import freeze_time
 
-from purchases.models import Purchase
-from .factories import PurchaseFactory
-from purchases.serializers import PurchaseSerializer
+from purchases.models import Purchase, Payment
+from .factories import PurchaseFactory, PaymentFactory
+from users.tests.factories import UserFactory
+from wallets.tests.factories import WalletFactory
 
 
 class TestPurchaseModel(TestCase):
@@ -12,7 +13,6 @@ class TestPurchaseModel(TestCase):
     def setUp(self):
         with freeze_time('2018-10-10'):
             self.purchase = PurchaseFactory()
-        self.purchase_serializer = PurchaseSerializer(instance=self.purchase)
 
     def test_create(self):
         self.assertIsInstance(self.purchase, Purchase)
@@ -23,3 +23,24 @@ class TestPurchaseModel(TestCase):
             'available: None value: 100.00 made_at: 2018-10-10 00:00:00+00:00'
         )
         self.assertEqual(str(self.purchase), expected_result)
+
+
+class TestPaymentModel(TestCase):
+
+    def setUp(self):
+        user = UserFactory(email='test2@email.com')
+        wallet = WalletFactory(user=user)
+        with freeze_time('2018-10-10'):
+            purchase = PurchaseFactory(wallet=wallet)
+            self.payment = PaymentFactory(purchase=purchase)
+
+    def test_create(self):
+        self.assertIsInstance(self.payment, Payment)
+
+    def test_str(self):
+        expected_result = (
+            'Purchase: Wallet: User: test2@email.com limit: 0.00 available: '
+            'None value: 100.00 made_at: 2018-10-10 00:00:00+00:00 '
+            'value: 100.00'
+        )
+        self.assertEqual(str(self.payment), expected_result)
