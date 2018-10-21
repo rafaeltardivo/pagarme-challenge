@@ -22,6 +22,9 @@ class Purchase(models.Model):
             self.wallet, self.value, self.made_at
         )
 
+    class Meta:
+        ordering = ['id', ]
+
 
 class Payment(models.Model):
     """Model for the wallet's bill."""
@@ -42,3 +45,11 @@ class Payment(models.Model):
         max_digits=8,
         decimal_places=2,
     )
+
+    def __str__(self):
+        return 'Purchase: {} value: {}'.format(
+            self.purchase, self.value,
+        )
+
+    class Meta:
+        ordering = ['id', ]
