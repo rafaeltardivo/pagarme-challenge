@@ -22,8 +22,8 @@ def update_wallet_post_create_card(sender, instance, created, **kwargs):
 
         # updates related wallet limit and available
         related_wallet = instance.wallet
-
-        related_wallet.credit_available = Decimal('0.00')
+        if not related_wallet.credit_available:
+            related_wallet.credit_available = Decimal('0.00')
         related_wallet.credit_limit += Decimal(instance.limit)
         related_wallet.credit_available += Decimal(instance.limit)
         related_wallet.save()
