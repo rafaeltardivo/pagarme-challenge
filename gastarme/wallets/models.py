@@ -26,7 +26,7 @@ class Wallet(models.Model):
 
     def __str__(self):
         return 'User: {} limit: {} available: {}'.format(
-            self.user, self.credit_limit, self.credit_available
+            self.user.id, self.credit_limit, self.credit_available
         )
 
     class Meta:
@@ -54,7 +54,7 @@ class CreditCard(models.Model):
 
     def __str__(self):
         return 'Wallet: {} number: {} limit: {} monthly_billing_day: {}'.format(
-            self.wallet, self.number, self.limit, self.monthly_billing_day
+            self.wallet.id, self.number, self.limit, self.monthly_billing_day
         )
 
     class Meta:

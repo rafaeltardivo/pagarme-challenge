@@ -19,7 +19,7 @@ class Purchase(models.Model):
 
     def __str__(self):
         return 'Wallet: {} value: {} made_at: {}'.format(
-            self.wallet, self.value, self.made_at
+            self.wallet.id, self.value, self.made_at
         )
 
     class Meta:
@@ -34,13 +34,11 @@ class Payment(models.Model):
         on_delete=models.PROTECT,
         related_name='payments'
     )
-
     credit_card = models.ForeignKey(
         CreditCard,
         on_delete=models.PROTECT,
         related_name='credit_card_records'
     )
-
     value = models.DecimalField(
         max_digits=8,
         decimal_places=2,
@@ -48,7 +46,7 @@ class Payment(models.Model):
 
     def __str__(self):
         return 'Purchase: {} value: {}'.format(
-            self.purchase, self.value,
+            self.purchase.id, self.value,
         )
 
     class Meta:

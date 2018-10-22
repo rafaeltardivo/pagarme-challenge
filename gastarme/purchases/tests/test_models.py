@@ -19,8 +19,7 @@ class TestPurchaseModel(TestCase):
 
     def test_str(self):
         expected_result = (
-            'Wallet: User: name@test.com limit: 0.00 '
-            'available: None value: 100.00 made_at: 2018-10-10 00:00:00+00:00'
+            'Wallet: 1 value: 100.00 made_at: 2018-10-10 00:00:00'
         )
         self.assertEqual(str(self.purchase), expected_result)
 
@@ -39,8 +38,6 @@ class TestPaymentModel(TestCase):
 
     def test_str(self):
         expected_result = (
-            'Purchase: Wallet: User: test2@email.com limit: 0.00 available: '
-            'None value: 100.00 made_at: 2018-10-10 00:00:00+00:00 '
-            'value: 100.00'
+            'Purchase: 1 value: 100.00'
         )
         self.assertEqual(str(self.payment), expected_result)
