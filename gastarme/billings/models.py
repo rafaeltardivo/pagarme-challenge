@@ -13,7 +13,7 @@ class Bill(models.Model):
         on_delete=models.PROTECT,
         related_name='purchases'
     )
-    expires_at = models.DateTimeField()
+    expires_at = models.DateField()
     value = models.DecimalField(
         max_digits=8,
         decimal_places=2,
