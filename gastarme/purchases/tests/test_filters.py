@@ -20,6 +20,8 @@ class TestPurchaseFilters(test.APITransactionTestCase):
             self.purchase_one = PurchaseFactory(wallet=self.wallet, id=1)
         with freeze_time('2018-10-9'):
             self.purchase_two = PurchaseFactory(wallet=self.wallet, id=2)
+        with freeze_time('2018-10-10'):
+            self.purchase_three = PurchaseFactory(wallet=self.wallet, id=3)
 
     @patch('purchases.logger.info')
     def test_made_at_min(self, logger_mock):
@@ -27,10 +29,13 @@ class TestPurchaseFilters(test.APITransactionTestCase):
 
         response = self.client.get(
             reverse('purchases-list'),
-            {'made_at__gte': self.purchase_one.made_at}
+            {'made_at__gte': self.purchase_two.made_at}
         )
 
+        content = response.json()['results']
         self.assertEqual(response.json()['count'], 2)
+        self.assertEqual(content[0]['id'], 2)
+        self.assertEqual(content[1]['id'], 3)
         logger_mock.assert_called()
 
     @patch('purchases.logger.info')
