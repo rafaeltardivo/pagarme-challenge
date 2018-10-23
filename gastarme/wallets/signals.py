@@ -1,13 +1,15 @@
-from decimal import Decimal
-
 from django.dispatch import receiver
-from django.db.models import Sum
 from django.db.models.signals import post_save
 
-from billings.services import update_debt
+from billings.services import update_credit
 from purchases.models import Purchase
 from .models import CreditCard
-from .services import set_payment_records
+from .services import (
+    new_card_update_wallet,
+    new_purchase_update_wallet,
+    bill_paid_update_wallet,
+    bill_paid_update_credit_card
+)
 
 
 @receiver(post_save, sender=CreditCard)
@@ -17,18 +19,7 @@ def update_wallet_post_create_card(sender, instance, created, **kwargs):
     """
 
     if created:
-        # sets the available limit
-        instance.available = instance.limit
-        instance.save()
-
-        # updates related wallet limit and available
-        related_wallet = instance.wallet
-        if not related_wallet.credit_available:
-            related_wallet.credit_available = Decimal('0.00')
-
-        related_wallet.credit_limit += Decimal(instance.limit)
-        related_wallet.credit_available += Decimal(instance.limit)
-        related_wallet.save()
+        new_card_update_wallet(instance)
 
 
 @receiver(post_save, sender=Purchase)
@@ -36,26 +27,15 @@ def update_wallet_post_purchase(sender, instance, **kwargs):
     """Receiver for the Purchase post-save signal that will update
        credit limits.
     """
-    wallet = instance.wallet
-    cards = wallet.credit_cards.all()
 
-    set_payment_records(cards, instance)
-
-    result = CreditCard.objects.aggregate(Sum('available'))
-    wallet.credit_available = result['available__sum']
-    wallet.save()
+    new_purchase_update_wallet(instance)
 
 
-@receiver(update_debt)
-def update_wallet_post_bill_paid(sender, bill, value_paid, **kwargs):
+@receiver(update_credit)
+def update_credit_post_bill_paid(sender, bill, value_paid, **kwargs):
     """Receiver for the  update_debt signal (post bill payment) that will
        update the related wallet.
     """
-    credit_card = bill.credit_card
-    wallet = credit_card.wallet
 
-    credit_card.available += value_paid
-    credit_card.save()
-
-    wallet.credit_available += value_paid
-    wallet.save()
+    bill_paid_update_wallet(bill, value_paid)
+    bill_paid_update_credit_card(bill, value_paid)
