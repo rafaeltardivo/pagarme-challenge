@@ -5,7 +5,7 @@ from rest_framework import test, status
 
 from users.tests.factories import UserFactory
 from wallets.tests.factories import WalletFactory
-from wallets.models import Wallet, CreditCard
+from wallets.models import Wallet
 
 
 class TestWalletPermissions(test.APITransactionTestCase):
