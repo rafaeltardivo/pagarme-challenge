@@ -63,7 +63,7 @@ If your purchase exceeds the chosen card limit, the next one will be used consid
 
 ### Billing
 
-You'll be billed for each card used, always considering the next month expiration day. Wanna know more about our project, please check our [API documentation](#api-documentation)
+You'll be billed for each card used, always considering the next month expiration day. Wanna know more about our project, please check our [API documentation](#api-documentation).
 
 ## Developing
 ### First Install
