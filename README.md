@@ -3,10 +3,12 @@ A credit card hub "wallet" service, designed to improve the customer payment exp
 
 ## Table of Contents
 
+- [How it works](#how-it-works)
 - [Technology](#technology)
 - [Developing](#developing)
 	- [First Install](#first-install)
 	- [Running the tests](#running-the-tests)
+	- [Reseting your environment](#running-the-tests)
 - [API Documentation](#testing)
 - [Acknowledgement](#acknowledgement)       
 
@@ -24,6 +26,38 @@ A credit card hub "wallet" service, designed to improve the customer payment exp
 - [Docker Compose](https://docs.docker.com/compose/) 1.17.1
 - [Mkdocs](https://www.mkdocs.org/)
 
+
+## How it works
+
+**Gastar.me** will manage all of your credit cards and choose the best considering the billing date and credit limit.
+
+
+## Card Management Criteria
+
+#### Billing date
+Let's say you have a wallet with these two cards:
+
+|   |  Number |  Limit |  Billing Day |
+|---|---|---|---|
+|  *Card One* | 4291749290818600  | 900.00  |  9 |
+|  *Card Two*  | 4291749290818622  | 800.00  | 8  |
+
+The **first priority** is the later billing date, so the card chosen is the one who bills later, which is the **Card One**.
+
+#### Limit
+Let's say you have a wallet with these two cards:
+
+|   |  Number |  Limit |  Billing Day |
+|---|---|---|---|
+|  *Card One* | 4291749290818600  | 900.00  |  8 |
+|  *Card Two*  | 4291749290818622  | 800.00  | 8  |
+
+The **second priority** is the lower limit. Since they are billed on the same day, **Card Two** will be chosen for having the lower credit limit.
+
+#### Using more than one card
+
+If your purchase exceeds the chosen card limit, the next one will be used considering the same criteria.
+
 ## Developing
 ### First Install
 1 - Build the application:  
@@ -38,16 +72,17 @@ make up-detached
 ```  
 make migrations
 ```  
-**OBS**: If eventually you want to set the project up from scratch again, just execute:
-```
-make destroy
-```
-After that, in order to run the application you'll need to repeat steps 1, 2 and 3 again.
 
 ### Running the tests
 ```
 make test  
 ```
+### Reseting your environment
+If eventually you want to reset your environment, execute:
+```
+make destroy
+```
+After that, in order to run the application you'll need repeat the [First Install](#first-install) proccess.
 
 ## API Documentation
  - [API Documentation](https://rafaeltardivo.github.io/gastarme/)
