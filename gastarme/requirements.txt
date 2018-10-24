@@ -6,3 +6,6 @@ factory-boy==2.11.1
 coverage==4.5.1
 freezegun==0.3.10
 mkdocs==1.0.4
+python-dateutil
+drf-nested-routers==0.91
+python-decouple==3.1
