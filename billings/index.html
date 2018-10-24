@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Wallets - Gastar.me</title>
+  <title>Billings - Gastar.me</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Wallets";
-    var mkdocs_page_input_path = "wallets.md";
+    var mkdocs_page_name = "Billings";
+    var mkdocs_page_input_path = "billings.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -69,15 +69,27 @@
                     
     <a class="" href="../superusers/">Superusers</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../wallets/">Wallets</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../creditcards/">Credit Cards</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../purchases/">Purchases</a>
+                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Wallets</a>
+    <a class="current" href="./">Billings</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#wallets-v1wallets">Wallets - /v1/wallets/</a></li>
+    <li class="toctree-l3"><a href="#billings-v1billings">Billings - /v1/billings/</a></li>
     
 
-    <li class="toctree-l3"><a href="#create">CREATE</a></li>
+    <li class="toctree-l3"><a href="#patch">PATCH</a></li>
     
         <ul>
         
@@ -86,8 +98,6 @@
             <li><a class="toctree-l4" href="#response-content">Response Content</a></li>
         
             <li><a class="toctree-l4" href="#example">Example</a></li>
-        
-            <li><a class="toctree-l4" href="#validations">Validations</a></li>
         
         </ul>
     
@@ -120,30 +130,7 @@
         </ul>
     
 
-    <li class="toctree-l3"><a href="#delete">DELETE</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#request-content_3">Request Content</a></li>
-        
-            <li><a class="toctree-l4" href="#example_3">Example</a></li>
-        
-        </ul>
-    
-
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../creditcards/">Credit Cards</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../purchases/">Purchases</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../billings/">Billings</a>
                 </li>
     </ul>
 	    </li>
@@ -174,7 +161,7 @@
         
       
     
-    <li>Wallets</li>
+    <li>Billings</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -184,7 +171,7 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="wallets-v1wallets">Wallets - <code>/v1/wallets/</code></h2>
+                <h2 id="billings-v1billings">Billings - <code>/v1/billings/</code></h2>
 <table>
 <thead>
 <tr>
@@ -198,26 +185,48 @@
 <tbody>
 <tr>
 <td>User</td>
-<td><code>/v1/wallets/</code></td>
-<td><code>POST</code>, <code>GET</code></td>
+<td><code>/v1/billings/</code></td>
+<td><code>GET</code></td>
 <td><code>json</code></td>
-<td><code>200</code>, <code>201</code>, <code>400</code></td>
+<td><code>200</code></td>
 </tr>
 <tr>
-<td>Superuser</td>
-<td><code>/v1/wallets/</code></td>
-<td><code>GET</code>, <code>DELETE</code></td>
+<td>User</td>
+<td><code>/v1/billings/{id}/pay/</code></td>
+<td><code>PATCH</code></td>
 <td><code>json</code></td>
-<td><code>200</code>, <code>204</code></td>
+<td><code>200</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="create">CREATE</h2>
+<h2 id="patch">PATCH</h2>
 <p><strong> Permission required </strong>: User</p>
-<h4 id="request-content">Request Content</h4>
 <ul>
-<li>No content</li>
+<li>Add the bill id to the URL and <strong>pay</strong> to the resource as an action route: <code>/v1/billings/{1}/pay/</code></li>
 </ul>
+<h4 id="request-content">Request Content</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Min Length</th>
+<th>Max Length</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>Decimal</td>
+<td>Yes</td>
+<td>3</td>
+<td>12</td>
+<td>Value to be paid</td>
+</tr>
+</tbody>
+</table>
 <h4 id="response-content">Response Content</h4>
 <table>
 <thead>
@@ -231,59 +240,48 @@
 <tr>
 <td><code>id</code></td>
 <td>Integer</td>
-<td>Wallet's id</td>
+<td>Bill id</td>
 </tr>
 <tr>
-<td><code>credit_limit</code></td>
-<td>Decimal</td>
-<td>Wallet's limit</td>
-</tr>
-<tr>
-<td><code>credit_available</code></td>
-<td>Decimal</td>
-<td>Current available credit</td>
-</tr>
-<tr>
-<td><code>created_at</code></td>
+<td><code>expires_at</code></td>
 <td>Timestamp</td>
-<td>Date and time fo the creation</td>
+<td>Expiration date of the bill</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>Decimal</td>
+<td>Bill value that remains after the payment</td>
+</tr>
+<tr>
+<td><code>credit_card</code></td>
+<td>Integer</td>
+<td>Related credit card id</td>
 </tr>
 </tbody>
 </table>
 <h4 id="example">Example</h4>
-<p><strong>Event</strong>: User <code>POST</code> to <code>/v1/wallets/</code><br />
-<strong>Request Content</strong>: <code>None</code></p>
-<p><strong>HTTP Status Code</strong>: <code>201</code><br />
-<strong>Response Content</strong>:</p>
+<p><strong>Event</strong>: User <code>PATCH</code> to <code>/v1/billings/1/pay/</code><br />
+<strong>Request Content</strong>: </p>
 <pre><code>{
-    &quot;id&quot;: 1,
-    &quot;credit_limit&quot;: &quot;0.00&quot;,
-    &quot;credit_available&quot;: &quot;0.00&quot;,
-    &quot;created_at&quot;: &quot;2018-10-14T11:17:26.702134&quot;
+    &quot;value&quot;: &quot;150.00&quot;   
 }
 </code></pre>
 
-<h4 id="validations">Validations</h4>
-<p><strong>HTTP Status Code</strong>: <code>400</code>  </p>
-<table>
-<thead>
-<tr>
-<th>Content</th>
-<th>Detail</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>user</code>: Already has a wallet.</td>
-<td>Every user must have only one wallet</td>
-</tr>
-</tbody>
-</table>
+<p><strong>HTTP Status Code</strong>: <code>200</code><br />
+<strong>Response Content</strong>:</p>
+<pre><code>{
+    &quot;id&quot;: 1,
+    &quot;expires_at&quot;: &quot;2018-11-20&quot;,
+    &quot;value&quot;: &quot;450.00&quot;,
+    &quot;credit_card&quot;: 1
+}
+</code></pre>
+
 <h2 id="retrieve">RETRIEVE</h2>
 <p><strong> Permission required </strong>: User</p>
 <h4 id="request-content_1">Request Content</h4>
 <ul>
-<li>Add the wallet id to the URL: <code>/v1/wallets/{wallet_id}/</code></li>
+<li>Add the bill id to the URL: <code>/v1/billings/{1}/</code></li>
 </ul>
 <h4 id="response-content_1">Response Content</h4>
 <table>
@@ -298,40 +296,40 @@
 <tr>
 <td><code>id</code></td>
 <td>Integer</td>
-<td>Wallet's id</td>
+<td>Bill id</td>
 </tr>
 <tr>
-<td><code>credit_limit</code></td>
-<td>Decimal</td>
-<td>Wallet's limit</td>
-</tr>
-<tr>
-<td><code>credit_available</code></td>
-<td>Decimal</td>
-<td>Current available credit</td>
-</tr>
-<tr>
-<td><code>created_at</code></td>
+<td><code>expires_at</code></td>
 <td>Timestamp</td>
-<td>Date and time fo the creation</td>
+<td>Expiration date of the bill</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>Decimal</td>
+<td>Bill value</td>
+</tr>
+<tr>
+<td><code>credit_card</code></td>
+<td>Integer</td>
+<td>Related credit card id</td>
 </tr>
 </tbody>
 </table>
 <h4 id="example_1">Example</h4>
-<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/wallets/1/</code><br />
-<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/billings/1/</code><br />
+<strong>Request Content</strong>:  None </p>
 <p><strong>HTTP Status Code</strong>: <code>200</code><br />
 <strong>Response Content</strong>:</p>
 <pre><code>{
     &quot;id&quot;: 1,
-    &quot;credit_limit&quot;: &quot;0.00&quot;,
-    &quot;credit_available&quot;: &quot;0.00&quot;,
-    &quot;created_at&quot;: &quot;2018-10-14T11:18:26.702134
+    &quot;expires_at&quot;: &quot;2018-11-20&quot;,
+    &quot;value&quot;: &quot;475.00&quot;,
+    &quot;credit_card&quot;: 1
 }
 </code></pre>
 
 <h2 id="list">LIST</h2>
-<p><strong> Permission required </strong>: Superuser</p>
+<p><strong> Permission required </strong>: User</p>
 <h4 id="request-content_2">Request Content</h4>
 <ul>
 <li>None</li>
@@ -348,16 +346,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code>user</code></td>
-<td>Integer</td>
+<td><code>expires_at__gte</code></td>
+<td>Date</td>
 <td>No</td>
-<td>Filter by user id</td>
+<td>Filter by minimum date of expiration (greater than or equal)</td>
 </tr>
 <tr>
-<td><code>id</code></td>
-<td>Integer</td>
+<td><code>expires_at__lte</code></td>
+<td>Date</td>
 <td>No</td>
-<td>Filter by id</td>
+<td>Filter by maximum date of expiration (lesser than or equal)</td>
 </tr>
 </tbody>
 </table>
@@ -374,28 +372,28 @@
 <tr>
 <td><code>id</code></td>
 <td>Integer</td>
-<td>Wallet's id</td>
+<td>Bill id</td>
 </tr>
 <tr>
-<td><code>credit_limit</code></td>
-<td>Decimal</td>
-<td>Wallet's limit</td>
-</tr>
-<tr>
-<td><code>credit_available</code></td>
-<td>Decimal</td>
-<td>Current available credit</td>
-</tr>
-<tr>
-<td><code>created_at</code></td>
+<td><code>expires_at</code></td>
 <td>Timestamp</td>
-<td>Date and time fo the creation</td>
+<td>Expiration date of the bill</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>Decimal</td>
+<td>Bill value</td>
+</tr>
+<tr>
+<td><code>credit_card</code></td>
+<td>Integer</td>
+<td>Related credit card id</td>
 </tr>
 </tbody>
 </table>
 <h4 id="example_2">Example</h4>
-<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/wallets/</code><br />
-<strong>Request Content</strong>: <code>None</code></p>
+<p><strong>Event</strong>: User <code>GET</code> to <code>/v1/billings/</code><br />
+<strong>Request Content</strong>:  None</p>
 <p><strong>HTTP Status Code</strong>: <code>200</code><br />
 <strong>Response Content</strong>:</p>
 <pre><code>{
@@ -405,33 +403,19 @@
     &quot;results&quot;: [
         {
             &quot;id&quot;: 1,
-            &quot;credit_limit&quot;: &quot;0.00&quot;,
-            &quot;credit_available&quot;: &quot;0.00&quot;,
-            &quot;created_at&quot;: &quot;2018-10-15T17:10:29.481854&quot;,
-            &quot;user&quot;: 9
+            &quot;expires_at&quot;: &quot;2018-11-20&quot;,
+            &quot;value&quot;: &quot;475.00&quot;,
+            &quot;credit_card&quot;: 1
         },
         {
             &quot;id&quot;: 2,
-            &quot;credit_limit&quot;: &quot;0.00&quot;,
-            &quot;credit_available&quot;: &quot;0.00&quot;,
-            &quot;created_at&quot;: &quot;2018-10-15T17:44:03.746431&quot;,
-            &quot;user&quot;: 10
+            &quot;expires_at&quot;: &quot;2018-11-19&quot;,
+            &quot;value&quot;: &quot;50.00&quot;,
+            &quot;credit_card&quot;: 2
         }
     ]
 }
 </code></pre>
-
-<h2 id="delete">DELETE</h2>
-<p><strong> Permission required </strong>: Superuser</p>
-<h4 id="request-content_3">Request Content</h4>
-<ul>
-<li>Add the wallet id to the URL: <code>/v1/wallets/{wallet_id}/</code></li>
-</ul>
-<h4 id="example_3">Example</h4>
-<p><strong>Event</strong>: User <code>DELETE</code> to <code>/v1/wallets/1/</code><br />
-<strong>Request Content</strong>: <code>None</code></p>
-<p><strong>HTTP Status Code</strong>: <code>204</code><br />
-<strong>Response Content</strong>: <code>None</code></p>
               
             </div>
           </div>
@@ -439,10 +423,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../creditcards/" class="btn btn-neutral float-right" title="Credit Cards">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../superusers/" class="btn btn-neutral" title="Superusers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../purchases/" class="btn btn-neutral" title="Purchases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -468,10 +450,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../superusers/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../purchases/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../creditcards/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
