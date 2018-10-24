@@ -33,13 +33,21 @@ make build
 2 - Run the application:  
 ```  
 make up-detached
-```
+```  
 3 - Execute the migrations  
 ```  
 make migrations
 ```  
+**OBS**: If eventually you want to set the project up from scratch again, just execute:
+```
+make destroy
+```
+After that, in order to run the application you'll need to repeat steps 1, 2 and 3 again.
 
 ### Running the tests
+```
+make test  
+```
 
 ## API Documentation
  - [API Documentation](https://rafaeltardivo.github.io/gastarme/)
