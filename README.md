@@ -60,7 +60,7 @@ If your purchase exceeds the chosen card limit, the next one will be used consid
 
 ### Billing
 
-You'll be billed for each card used, always considering the next month expiration day.
+You'll be billed for each card used, always considering the next month expiration day. Wanna know more about our project, please check our [API documentation](#api-documentation)
 
 ## Developing
 ### First Install
@@ -89,7 +89,8 @@ make destroy
 After that, in order to run the application you'll need repeat the [First Install](#first-install) proccess.
 
 ## API Documentation
- - [API Documentation](https://rafaeltardivo.github.io/gastarme/)
+ https://rafaeltardivo.github.io/gastarme/
 
 ## Acknowledgement
+To the open-source community for providing us such a rich set of tools to work with.
 
