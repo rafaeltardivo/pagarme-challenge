@@ -4,6 +4,9 @@ A credit card hub "wallet" service, designed to improve the customer payment exp
 ## Table of Contents
 
 - [How it works](#how-it-works)
+	- [Wallet and cards](#wallet-and-cards)
+	- [Card management criteria](#card-management-criteria)
+	- [Billing](#billing)
 - [Technology](#technology)
 - [Developing](#developing)
 	- [First Install](#first-install)
