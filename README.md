@@ -1,5 +1,5 @@
 # gastarme
-A credit card hub "wallet" service, designed to improve the customer payment experience
+A credit card hub "wallet" service, designed to improve the customer payment experience.
 
 ## Table of Contents
 
@@ -29,10 +29,10 @@ A credit card hub "wallet" service, designed to improve the customer payment exp
 
 ## How it works
 
-**Gastar.me** will manage all of your credit cards and choose the best considering the billing date and credit limit.
+### Wallet and cards
+You'll need to create a **wallet** and add your **credit cards** to it. After the registration proccess, you will be able to make **purchases** without worrying about which card will be used, our [card management criteria](#card-management-criteria) will take care of it for you.
 
-
-## Card Management Criteria
+### Card management criteria
 
 #### Billing date
 Let's say you have a wallet with these two cards:
@@ -57,6 +57,10 @@ The **second priority** is the lower limit. Since they are billed on the same da
 #### Using more than one card
 
 If your purchase exceeds the chosen card limit, the next one will be used considering the same criteria.
+
+### Billing
+
+You'll be billed for each card used, always considering the next month expiration day.
 
 ## Developing
 ### First Install
