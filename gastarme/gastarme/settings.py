@@ -151,3 +151,5 @@ JWT_AUTH = {
 }
 
 TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
+
+ALLOWED_HOSTS = '*'
