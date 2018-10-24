@@ -8,5 +8,6 @@ nav:
       - Wallets: wallets.md
       - Credit Cards: creditcards.md
       - Purchases: purchases.md
+      - Billings: billings.md
 theme: readthedocs
 

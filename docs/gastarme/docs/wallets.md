@@ -32,7 +32,7 @@
 	"id": 1,
 	"credit_limit": "0.00",
 	"credit_available": "0.00",
-	"created_at": "2018-10-14T11:17:26.702134-03:00"
+	"created_at": "2018-10-14T11:17:26.702134"
 }
 ```
 
@@ -69,7 +69,7 @@
 	"id": 1,
 	"credit_limit": "0.00",
 	"credit_available": "0.00",
-	"created_at": "2018-10-14T11:18:26.702134-03:00"
+	"created_at": "2018-10-14T11:18:26.702134
 }
 ```
 
@@ -110,14 +110,14 @@
 			"id": 1,
 			"credit_limit": "0.00",
 			"credit_available": "0.00",
-			"created_at": "2018-10-15T17:10:29.481854-03:00",
+			"created_at": "2018-10-15T17:10:29.481854",
 			"user": 9
 		},
 		{
 			"id": 2,
 			"credit_limit": "0.00",
 			"credit_available": "0.00",
-			"created_at": "2018-10-15T17:44:03.746431-03:00",
+			"created_at": "2018-10-15T17:44:03.746431",
 			"user": 10
 		}
 	]
