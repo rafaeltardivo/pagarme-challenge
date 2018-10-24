@@ -15,7 +15,15 @@ class PurchaseViewSet(ModelViewSet):
     permission_classes = (IsRegularUser, )
     serializer_class = PurchaseSerializer
     filter_class = PurchaseFilter
-    queryset = Purchase.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user and hasattr(user, 'wallet'):
+            queryset = Purchase.objects.filter(wallet=user.wallet)
+        else:
+            queryset = Purchase.objects.none()
+        return queryset
 
     def create(self, request, *args, **kwargs):
         logger.info("Purchase create request", extra={'user': request.user})
