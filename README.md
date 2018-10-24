@@ -27,7 +27,7 @@ A credit card hub "wallet" service, designed to improve the customer payment exp
 ### Running the tests
 
 ## API Documentation
- - [v1](https://rafaeltardivo.github.io/gastarme/)
+ - [API Documentation](https://rafaeltardivo.github.io/gastarme/)
 
 ## Acknowledgement
 
