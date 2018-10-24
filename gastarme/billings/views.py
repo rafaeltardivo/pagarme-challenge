@@ -16,7 +16,7 @@ from . import logger
 
 
 class BillViewSet(ReadOnlyModelViewSet):
-    """ListDetail view for bills."""
+    """Read only viewset for bills."""
     permission_classes = (IsRegularUser, )
     serializer_class = BillSerializer
     filter_class = BillFilter

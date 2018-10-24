@@ -12,7 +12,7 @@ class BillSerializer(serializers.ModelSerializer):
 
 
 class BillPaySerializer(serializers.ModelSerializer):
-    """Serializer for the bill model."""
+    """Serializer for the pay action."""
 
     def validate_value(self, value):
         if not value:

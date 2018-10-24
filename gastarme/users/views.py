@@ -3,7 +3,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 
 from .serializers import UserSerializer, SuperuserSerializer
-from .permissions import IsSuperUser
+from commons.permissions import IsSuperUser
 
 from . import logger
 

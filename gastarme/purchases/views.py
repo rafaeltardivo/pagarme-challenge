@@ -11,7 +11,7 @@ from . import logger
 
 
 class PurchaseViewSet(ModelViewSet):
-    """Create view for purchases."""
+    """Viewset for purchases."""
     permission_classes = (IsRegularUser, )
     serializer_class = PurchaseSerializer
     filter_class = PurchaseFilter
