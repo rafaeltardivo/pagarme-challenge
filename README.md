@@ -69,15 +69,23 @@ You'll be billed for each card used, always considering the next month expiratio
 
 ## Developing
 ### First Install
-1 - Build the application:  
+1 - Clone the project
+```
+git clone https://github.com/rafaeltardivo/gastarme.git
+```
+2 - Change the directory
+```
+cd gastarme
+```
+3 - Build the application:  
 ```
 make build
 ```  
-2 - Run the application:  
+4 - Run the application:  
 ```  
 make up-detached
 ```  
-3 - Execute the migrations  
+5 - Execute the migrations  
 ```  
 make migrations
 ```  
