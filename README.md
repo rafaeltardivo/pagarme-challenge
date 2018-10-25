@@ -1,6 +1,8 @@
 # gastarme
 A credit card hub "wallet" service, designed to improve the customer payment experience.
 
+[![CircleCI](https://circleci.com/gh/rafaeltardivo/gastarme/tree/master.svg?style=svg&circle-token=b79ba10ca29d1f31381fc9f95d4a558d4783533e)](https://circleci.com/gh/rafaeltardivo/gastarme/tree/master)
+
 ## Table of Contents
 
 - [How it works](#how-it-works)
