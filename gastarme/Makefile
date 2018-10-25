@@ -1,12 +1,15 @@
 build:
 	docker-compose build --no-cache
 
-up-detached:
+up:
 	docker-compose up -d
 	docker-compose restart gastarme
 
 migrate:
 	docker-compose exec gastarme su -c "python manage.py migrate"
+
+log:
+	docker-compose logs -f
 
 superuser:
 	docker-compose exec gastarme su -c "python manage.py createsuperuser"
