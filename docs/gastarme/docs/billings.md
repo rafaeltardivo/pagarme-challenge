@@ -12,6 +12,12 @@
 
 - Add the bill id to the URL and **pay** to the resource as an action route: `/v1/billings/{1}/pay/`
 
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 
 |  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
@@ -30,7 +36,12 @@
 #### Example
 
 **Event**: User `PATCH` to `/v1/billings/1/pay/`  
-**Request Content**: 
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: 
 ```
 {
 	"value": "150.00"	
@@ -52,6 +63,12 @@
 ##RETRIEVE
 ** Permission required **: User
 
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 
 - Add the bill id to the URL: `/v1/billings/{1}/`
@@ -69,7 +86,12 @@
 #### Example
 
 **Event**: User `GET` to `/v1/billings/1/`  
-**Request Content**:  None 
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**:  None 
 
 
 **HTTP Status Code**: `200`  
@@ -85,6 +107,13 @@
 
 ##LIST
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
  - None
 
@@ -106,7 +135,12 @@
 #### Example
 
 **Event**: User `GET` to `/v1/billings/`  
-**Request Content**:  None
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**:  None
 
 
 **HTTP Status Code**: `200`  

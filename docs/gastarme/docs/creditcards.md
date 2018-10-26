@@ -8,6 +8,12 @@
 ##CREATE
 ** Permission required **: User
 
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 |  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
 |---|---|---|---|---|---|
@@ -35,7 +41,12 @@
 #### Example
 
 **Event**: User `POST` to `/v1/wallets/1/creditcards/`  
-**Request Content**:
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**:
 ```
 {
   	"wallet": 1,
@@ -94,6 +105,13 @@
 
 ##RETRIEVE
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
  - Add the wallet  and the creditcard id to the URL: `/v1/wallets/{wallet_id}/creditcards/{creditcard_id}/`
 
@@ -113,7 +131,12 @@
 #### Example
 
 **Event**: User `GET` to `/v1/wallets/1/creditcards/1/`  
-**Request Content**: `None`
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: `None`
 
 **HTTP Status Code**: `200`  
 **Response Content**:
@@ -132,6 +155,13 @@
 
 ##LIST
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
  - None
 
@@ -158,7 +188,12 @@
 #### Example
 
 **Event**: User `GET` to `/v1/wallets/1/creditcards/`  
-**Request Content**: `None`
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: `None`
 
 **HTTP Status Code**: `200`  
 **Response Content**:
@@ -194,6 +229,13 @@
 
 ##DELETE
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 - Add the wallet id to the URL: `/v1/wallets/{wallet_id}/creditcards/{creditcard_id}/`
 
@@ -201,7 +243,12 @@
 #### Example
 
 **Event**: User `DELETE` to `/v1/wallets/1/creditcards/1/`  
-**Request Content**: `None`
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: `None`
 
 **HTTP Status Code**: `204`  
 **Response Content**: `None`

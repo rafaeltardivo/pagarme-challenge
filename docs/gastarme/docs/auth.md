@@ -8,6 +8,12 @@
 
 ### OBTAIN
 ** Permission required **: None
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+
 #### Request Content
 
 |  Field |  Type |  Required |  Detail |
@@ -26,7 +32,11 @@
 #### Example
 
 **Event**: Anonymous `POST` to `/v1/auth/jwt/obtain/`  
-**Request Content**: 
+**Header Content**:
+```
+Content-Type: application/json
+```
+**Body Content**: 
 ```
 {
 	"email": "jonhdoeqa@email.com",
@@ -54,6 +64,12 @@
 
 ### REFRESH
 ** Permission required **: None
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+
 #### Request Content
 
 |  Field |  Type |  Required |  Detail |
@@ -71,7 +87,11 @@
 #### Example
 
 **Event**: Anonymous `POST` to `/v1/auth/jwt/refresh/`  
-**Request Content**: 
+**Header Content**:
+```
+Content-Type: application/json
+```
+**Body Content**: 
 ```
 {
 	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImpvaG4uZG9lQGVtYWlsLmNvbSIsImV4cCI6MTUzOTc0MTI5NiwiZW1haWwiOiJqb2huLmRvZUBlbWFpbC5jb20iLCJvcmlnX2lhdCI6MTUzOTczNzY5Nn0.cq9TRU0lPKY1-A_miNEqtOE6Kgi9Fx0Av1JlNu1Nq84"

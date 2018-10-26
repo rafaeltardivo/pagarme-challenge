@@ -1,6 +1,7 @@
 site_name: Gastar.me
 nav:
     - Home: index.md
+    - Roadmap: roadmap.md
     - API Documentation:
       - Users: users.md
       - Authentication: auth.md

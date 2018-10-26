@@ -9,6 +9,12 @@
 ##CREATE
 ** Permission required **: User
 
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 
 |  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
@@ -29,7 +35,12 @@
 #### Example
 
 **Event**: User `POST` to `/v1/purchases/`  
-**Request Content**: 
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: 
 ```
 {
 	"wallet": 1,
@@ -67,6 +78,13 @@
 
 ##RETRIEVE
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
  - Add the purchase id to the URL: `/v1/purchases/{1}/`
 
@@ -82,7 +100,13 @@
 #### Example
 
 **Event**: User `GET` to `/v1/wallets/1/`  
-**Request Content**:  None
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**:  None
+
 
 **HTTP Status Code**: `200`  
 **Response Content**:
@@ -103,6 +127,13 @@
 
 ##LIST
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
  - None
 
@@ -125,7 +156,12 @@
 #### Example
 
 **Event**: User `GET` to `/v1/purchases/`  
-**Request Content**:  None
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**:  None
 
 
 **HTTP Status Code**: `200`  

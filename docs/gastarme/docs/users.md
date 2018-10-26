@@ -8,6 +8,12 @@
 
 ### CREATE
 ** Permission required **: None
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+
 #### Request Content
 
 |  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
@@ -25,8 +31,13 @@
 #### Example
 
 **Event**: Anonymous `POST` to `/v1/users/`  
-**Request Content**: 
+**Header Content**:
 ```
+Content-Type: application/json
+```
+**Body Content**: 
+```
+
 {
 	"name": "John Doe",
 	"email": "jonhdoeqa@email.com",

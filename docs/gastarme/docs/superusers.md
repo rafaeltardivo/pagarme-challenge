@@ -9,6 +9,13 @@ __Superusers can only be created by  other superusers__, so follow [these](https
 
 ### CREATE
 ** Permission required **: Superuser
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 
 |  Field | Type  | Required  |  Min Length |  Max Length |  Detail |
@@ -28,7 +35,12 @@ __Superusers can only be created by  other superusers__, so follow [these](https
 #### Example
 
 **Event**: Superuser `POST` to `/v1/users/superusers/`  
-**Request Content**: 
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: 
 ```
 {
 	"name": "John Super Doe",

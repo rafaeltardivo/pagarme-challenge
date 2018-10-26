@@ -8,6 +8,13 @@
 
 ##CREATE
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 
  - No content
@@ -23,7 +30,12 @@
 #### Example
 
 **Event**: User `POST` to `/v1/wallets/`  
-**Request Content**: `None`
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: `None`
 
 **HTTP Status Code**: `201`  
 **Response Content**:
@@ -46,6 +58,13 @@
 
 ##RETRIEVE
 ** Permission required **: User
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
  - Add the wallet id to the URL: `/v1/wallets/{wallet_id}/`
 
@@ -60,7 +79,12 @@
 #### Example
 
 **Event**: User `GET` to `/v1/wallets/1/`  
-**Request Content**: `None`
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: `None`
 
 **HTTP Status Code**: `200`  
 **Response Content**:
@@ -75,6 +99,13 @@
 
 ##LIST
 ** Permission required **: Superuser
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
  - None
 
@@ -96,7 +127,12 @@
 #### Example
 
 **Event**: User `GET` to `/v1/wallets/`  
-**Request Content**: `None`
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: `None`
 
 **HTTP Status Code**: `200`  
 **Response Content**:
@@ -126,13 +162,25 @@
 
 ##DELETE
 ** Permission required **: Superuser
+
+#### Headers
+|  Field | Content  |
+|---|---|
+|  Content-Type | application/json  |
+|  Authorization | JWT `{token}` |
+
 #### Request Content
 - Add the wallet id to the URL: `/v1/wallets/{wallet_id}/`
 
 #### Example
 
 **Event**: User `DELETE` to `/v1/wallets/1/`  
-**Request Content**: `None`
+**Header Content**:
+```
+Content-Type: application/
+Authorization: JWT {token}
+```
+**Body Content**: `None`
 
 **HTTP Status Code**: `204`  
 **Response Content**: `None`
