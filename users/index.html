@@ -55,6 +55,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../roadmap/">Roadmap</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">API Documentation</span>
     <ul class="subnav">
                 <li class=" current">
@@ -159,6 +164,21 @@
 </table>
 <h3 id="create">CREATE</h3>
 <p><strong> Permission required </strong>: None</p>
+<h4 id="headers">Headers</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody>
+</table>
 <h4 id="request-content">Request Content</h4>
 <table>
 <thead>
@@ -222,8 +242,13 @@
 </table>
 <h4 id="example">Example</h4>
 <p><strong>Event</strong>: Anonymous <code>POST</code> to <code>/v1/users/</code><br />
-<strong>Request Content</strong>: </p>
-<pre><code>{
+<strong>Header Content</strong>:</p>
+<pre><code>Content-Type: application/json
+</code></pre>
+
+<p><strong>Body Content</strong>: </p>
+<pre><code>
+{
     &quot;name&quot;: &quot;John Doe&quot;,
     &quot;email&quot;: &quot;jonhdoeqa@email.com&quot;,
     &quot;password&quot;: &quot;1234ABCD&quot;
@@ -317,7 +342,7 @@
         <a href="../auth/" class="btn btn-neutral float-right" title="Authentication">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../roadmap/" class="btn btn-neutral" title="Roadmap"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -343,7 +368,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../roadmap/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../auth/" style="color: #fcfcfc">Next &raquo;</a></span>
