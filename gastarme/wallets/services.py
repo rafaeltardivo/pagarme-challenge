@@ -77,3 +77,12 @@ def bill_paid_update_credit_card(bill, value_paid):
 
     credit_card.available += value_paid
     credit_card.save()
+
+
+def card_delete_update_wallet(card):
+    """Updates the related wallet everytime a card is deleted."""
+    wallet = card.wallet
+
+    wallet.credit_limit -= card.limit
+    wallet.credit_available -= card.available
+    wallet.save()

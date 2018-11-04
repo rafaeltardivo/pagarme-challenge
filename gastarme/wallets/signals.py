@@ -1,5 +1,5 @@
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 
 from billings.services import update_credit
 from purchases.models import Purchase
@@ -8,7 +8,8 @@ from .services import (
     new_card_update_wallet,
     new_purchase_update_wallet,
     bill_paid_update_wallet,
-    bill_paid_update_credit_card
+    bill_paid_update_credit_card,
+    card_delete_update_wallet
 )
 
 
@@ -39,3 +40,12 @@ def update_credit_post_bill_paid(sender, bill, value_paid, **kwargs):
 
     bill_paid_update_wallet(bill, value_paid)
     bill_paid_update_credit_card(bill, value_paid)
+
+
+@receiver(post_delete, sender=CreditCard)
+def update_wallet_post_delete_card(sender, instance, **kwargs):
+    """Receiver for the CreditCard post-delete signal that will update
+       wallet limits.
+    """
+
+    card_delete_update_wallet(instance)

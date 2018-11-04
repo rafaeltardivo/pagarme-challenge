@@ -3,7 +3,7 @@ from decimal import Decimal
 from unittest.mock import patch
 
 from django.test import TestCase
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 
 from wallets.models import CreditCard
 from purchases.models import Purchase
@@ -60,6 +60,21 @@ class TestWalletssSignals(TestCase):
         )
         bill = BillFactory(credit_card=CreditCardFactory(wallet=self.wallet))
         pay_bill(bill, Decimal('100.00'))
+
+        self.assertTrue(mocked_handler.called)
+        self.assertEquals(mocked_handler.call_count, 1)
+
+    @patch('wallets.signals.update_wallet_post_delete_card', autospec=True)
+    def test_update_wallet_post_delete_card(self, mocked_handler):
+
+        post_delete.connect(
+            mocked_handler,
+            sender=CreditCard,
+            dispatch_uid='test_handler'
+        )
+
+        card = CreditCardFactory(wallet=self.wallet)
+        card.delete()
 
         self.assertTrue(mocked_handler.called)
         self.assertEquals(mocked_handler.call_count, 1)

@@ -11,7 +11,8 @@ from wallets.services import (
     new_purchase_update_wallet,
     set_payment_records,
     bill_paid_update_wallet,
-    bill_paid_update_credit_card
+    bill_paid_update_credit_card,
+    card_delete_update_wallet
 )
 
 
@@ -177,3 +178,15 @@ class TestWalletsServices(TestCase):
         self.assertEqual(credit_card.available, Decimal('50.00'))
         bill_paid_update_credit_card(bill, Decimal('100.00'))
         self.assertEqual(credit_card.available, Decimal('150.00'))
+
+    def test_card_delete_update_wallet(self):
+        credit_card = CreditCardFactory(
+            wallet=self.wallet,
+            number='1111111111111111',
+            monthly_billing_day=10,
+            limit=Decimal('50.00')
+        )
+
+        self.assertEqual(self.wallet.credit_available, Decimal('50.00'))
+        card_delete_update_wallet(credit_card)
+        self.assertEqual(self.wallet.credit_available, Decimal('0.00'))
