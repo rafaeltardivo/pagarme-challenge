@@ -1,3 +1,4 @@
+from django.db import models
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.exceptions import MethodNotAllowed, PermissionDenied
 
@@ -72,7 +73,10 @@ class WalletViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         logger.info("Wallet delete request", extra={'user': request.user})
 
-        return super().destroy(request, *args, **kwargs)
+        try:
+            return super().destroy(request, *args, **kwargs)
+        except models.ProtectedError:
+            raise PermissionDenied("Can't delete due to related objects")
 
 
 class CreditCardViewSet(ModelViewSet):
@@ -92,7 +96,9 @@ class CreditCardViewSet(ModelViewSet):
                 if user.wallet.id == int(wallet_pk):
                     queryset = CreditCard.objects.filter(wallet=wallet_pk)
                 else:
-                    raise PermissionDenied
+                    raise PermissionDenied(
+                        'You must only access your own wallet'
+                    )
             else:
                 queryset = CreditCard.objects.filter(wallet__user=user)
 
@@ -119,4 +125,7 @@ class CreditCardViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         logger.info("CreditCard delete request", extra={'user': request.user})
 
-        return super().destroy(request, *args, **kwargs)
+        try:
+            return super().destroy(request, *args, **kwargs)
+        except models.ProtectedError:
+            raise PermissionDenied("Can't delete due to related objects")
